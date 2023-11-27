@@ -2,6 +2,7 @@ import { Route, Routes, Navigate } from "react-router";
 import Nav from "../Nav";
 import Main from "./Main";
 import Profile from "./Profile";
+import ProfileEditor from "./Profile/ProfileEditor";
 function Hustko() {
   return (
     <div>
@@ -9,7 +10,11 @@ function Hustko() {
       <Routes>
         <Route path="/" element={<Navigate to="Main" />} />
         <Route path="Main/*" element={<Main />} />
-        <Route path="Profile" element={<Profile />} />
+        <Route path="Profile/:userId" element={<Profile />} />
+        <Route
+          path="Profile/:userId/ProfileEditor"
+          element={<ProfileEditor />}
+        />
       </Routes>
     </div>
   );
