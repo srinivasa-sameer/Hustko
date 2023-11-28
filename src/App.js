@@ -1,9 +1,21 @@
-import './App.css';
+import "./App.css";
+import { HashRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router";
+import Login from "./Hustko/Login";
+import Hustko from "./Hustko";
 
 function App() {
   return (
     <div className="App">
-      <h1>Hustko - The Husky Store</h1>
+      <HashRouter>
+        <div>
+          <Routes>
+            <Route path="/" element={<Navigate to="/Hustko" />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Hustko/*" element={<Hustko />} />
+          </Routes>
+        </div>
+      </HashRouter>
     </div>
   );
 }
