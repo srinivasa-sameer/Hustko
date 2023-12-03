@@ -11,7 +11,8 @@ function ProfileEditor() {
   const [likedItems, setLikedItems] = useState(["Item1", "Item2", "Item3"]);
   const [isLiked, setLiked] = useState(true);
   const { userId } = useParams();
-  const user = db.users.find((user) => user.id === userId);
+  const currentser = db.users.find((user) => user.id === userId);
+  const [user, setUser] = useState(currentser);
   return (
     <div>
       <div className="container">
@@ -26,7 +27,7 @@ function ProfileEditor() {
           <div class="col-6 text-start mb-2">
             <input
               id="textbox-edit-username"
-              //value={user.username}
+              value={user.username}
               placeholder="Please Enter Username"
               className="form-control mb-2 me-2"
             />
@@ -41,7 +42,7 @@ function ProfileEditor() {
           <div class="col-6 text-start mb-2">
             <input
               id="textbox-edit-email"
-              //value={user.email}
+              value={user.email}
               placeholder="user@gmail.com"
               className="form-control mb-2 me-2"
               type="email"
@@ -57,7 +58,7 @@ function ProfileEditor() {
           <div class="col-6 text-start mb-2">
             <input
               id="textbox-edit-mobile"
-              //value={user.mobile}
+              value={user.mobile}
               placeholder="000-000-0000"
               className="form-control mb-2 me-2"
               type="tel"
@@ -73,7 +74,7 @@ function ProfileEditor() {
           <div class="col-6 text-start mb-2">
             <input
               id="textbox-edit-address"
-              //value={user.primAddress}
+              value={user.primAddress}
               placeholder="1234 Main St"
               className="form-control mb-2 me-2"
             />

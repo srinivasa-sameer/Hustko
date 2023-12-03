@@ -5,22 +5,24 @@ import { FcLike, FcDislike } from "react-icons/fc";
 import db from "../Database";
 
 function Profile() {
-  const [username, setUsername] = useState("Hustko User0");
-  const [password, setPassword] = useState("qwerty");
-  const [email, setEmail] = useState("huskyko@gmail.com");
-  const [mobile, setMobile] = useState("+10123456789");
-  const [address1, setAddress1] = useState("1234 Main St");
+  // const [username, setUsername] = useState("Hustko User0");
+  // const [password, setPassword] = useState("qwerty");
+  // const [email, setEmail] = useState("huskyko@gmail.com");
+  // const [mobile, setMobile] = useState("+10123456789");
+  // const [address1, setAddress1] = useState("1234 Main St");
   const [likedItems, setLikedItems] = useState(["Item1", "Item2", "Item3"]);
   const [isLiked, setLiked] = useState(true);
 
   const { userId } = useParams();
-  const user = db.users.find((user) => user.id === userId);
+  const currentser = db.users.find((user) => user.id === userId);
+
+  const [user, setUser] = useState(currentser);
   return (
     <div className="mx-2">
       <h1>Manage Profile</h1>
       <hr />
       <Link
-        to={`/Hustko/Profile/userId/ProfileEditor`}
+        to={`/Hustko/Profile/${userId}/ProfileEditor`}
         className="btn btn-outline-primary float-end mx-4"
       >
         <BiSolidEditAlt className="me-2 mb-1" size={21} />
@@ -50,7 +52,11 @@ function Profile() {
           </li>
           <li className="list-group-item">
             <strong>Primary Address: </strong>
-            {user.address1}
+            {user.primAddress}
+          </li>
+          <li className="list-group-item">
+            <strong>Husky Id: </strong>
+            {user.huskyId}
           </li>
           <li className="list-group-item">
             <strong>Liked Items: </strong>

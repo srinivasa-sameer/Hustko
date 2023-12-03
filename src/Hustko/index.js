@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from "react-router";
-import Nav from "../Nav";
+import Nav from "./Navigation/Nav";
 import Main from "./Main";
 import Profile from "./Profile";
 import ProfileEditor from "./Profile/ProfileEditor";
