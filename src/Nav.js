@@ -84,6 +84,40 @@ function Nav() {
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul class="navbar-nav ms-auto mx-2 mb-2 mb-lg-0">
+            <li class="nav-item mt-1">
+              {/* <Link
+                to="/Hustko/Profile"
+                class="nav-link active fs-5 dropdown-toggle"
+              >
+                Profile1
+              </Link> */}
+
+              <button
+                class="nav-link active dropdown btn btn-outline-dark dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Settings
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <Link class="dropdown-item" href="#">
+                    All Addresses
+                  </Link>
+                </li>
+                <li>
+                  <Link class="dropdown-item" href="#">
+                    Liked Items
+                  </Link>
+                </li>
+                <li>
+                  <Link class="dropdown-item" href="#">
+                    Sign Out
+                  </Link>
+                </li>
+              </ul>
+            </li>
             <li class="nav-item">
               <Link to="/Hustko/Profile" class="nav-link active fs-5">
                 Profile
