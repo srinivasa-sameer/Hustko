@@ -77,9 +77,9 @@ function Nav() {
               placeholder="Search"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" type="submit">
+            <Link to="/Hustko/Search"><button class="btn btn-outline-success" type="submit">
               Search
-            </button>
+            </button></Link>
           </form>
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
