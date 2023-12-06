@@ -27,25 +27,21 @@ const Search = () => {
         }
         if (searchString !== "") {
             const options = {
-                method: "GET",
-                url: "https://amazon24.p.rapidapi.com/api/product",
+                method: 'GET',
+                url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
                 params: {
-                    categoryID: "aps",
-                    keyword: { searchString },
-                    country: "US",
-                    page: "1",
+                    api_key: '214fce8e1f0329d7b9d8bf1002dc9fd2'
                 },
                 headers: {
-                    "X-RapidAPI-Host": "amazon24.p.rapidapi.com",
-                    "X-RapidAPI-Key":
-                        "7c3530cf95msh4a42849e06f7945p146398jsne990820a2f14",
-                },
+                    'X-RapidAPI-Key': '3a316b5327mshd645ab47cc34fdap19bb56jsn5c6e5a76aa2f',
+                    'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com'
+                }
             };
 
             axios
                 .request(options)
                 .then(function (response) {
-                    setProducts(response.data.docs);
+                    setProducts(response.data.results);
                 })
                 .catch(function (error) {});
         }
@@ -64,9 +60,9 @@ const Search = () => {
                 <div>
                     <Card
                         title={""}
-                        description={product.product_title}
-                        price={product.app_sale_price}
-                        image={product.product_main_image_url}
+                        description={product.name}
+                        price={product.price}
+                        image={product.image}
                     />
                 </div>
             ))}
