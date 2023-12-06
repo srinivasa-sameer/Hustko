@@ -12,7 +12,11 @@ function Hustko() {
         <Route path="/" element={<Navigate to="Main" />} />
         <Route path="Main/*" element={<Main />} />
         <Route path="Profile" element={<Profile />} />
-        <Route path="Search" element={<Search />} />
+        <Route path="Search" element={<Main />} />
+        <Route
+              path="Search/:searchText"
+              element={<Search />}
+        />
         <Route path="Profile/:userId" element={<Profile />} />
         <Route
           path="Profile/:userId/ProfileEditor"
