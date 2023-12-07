@@ -13,7 +13,6 @@ const Search = () => {
     const searchProductsInDatabase = async () => {
         if (searchText !== undefined) {
             await SearchProductsInDatabase(searchText).then((data) => {
-                console.log(data);
                 setDatabaseProducts(data);
             });
         }
@@ -69,14 +68,16 @@ const Search = () => {
                 </Link>
             ))}
             {databaseProducts.map((product) => (
-                <div>
-                    <Card
-                        title={product.manufacturer}
-                        description={product.name}
-                        price={product.price}
-                        image={product.image}
-                    />
-                </div>
+                <Link to={`/Hustko/InternalDetails/${product._id}`}>
+                    <div>
+                        <Card
+                            title={product.manufacturer}
+                            description={product.name}
+                            price={product.price}
+                            image={product.image}
+                        />
+                    </div>
+                </Link>
             ))}
         </div>
     );

@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import Search from "./Search";
 import ProfileEditor from "./Profile/ProfileEditor";
 import ExternalProducts from "./Search/externalProducts";
+import InternalProducts from "./Search/internalProducts";
 function Hustko() {
   return (
     <div>
@@ -15,6 +16,7 @@ function Hustko() {
         <Route path="Profile" element={<Profile />} />
         <Route path="Search" element={<Main />} />
         <Route path="ExternalDetails/:product_id" element={<ExternalProducts />} />
+        <Route path="InternalDetails/:product_id" element={<InternalProducts />} />
         <Route
               path="Search/:searchText"
               element={<Search />}
