@@ -1,7 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { BiSolidDog } from "react-icons/bi";
+import {useState} from "react";
 function Nav() {
   const { pathname } = useLocation();
+  const [searchText, setSearchText] = useState("");
+
   return (
     <div>
       {/* <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -76,10 +79,12 @@ function Nav() {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
             />
-            <button class="btn btn-outline-success" type="submit">
+            <Link to={`/Hustko/Search/${searchText}`}><button class="btn btn-outline-success" type="submit">
               Search
-            </button>
+            </button></Link>
           </form>
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
