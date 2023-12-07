@@ -19,31 +19,32 @@ const Search = () => {
   };
 
   const searchProducts = () => {
+    console.log(searchString);
     searchProductsInDatabase();
-    // if (searchText !== undefined) {
-    //   searchString = searchText;
-    // }
-    // if (searchString !== '') {
-    //   const options = {
-    //     method: 'GET',
-    //     url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
-    //     params: {
-    //       api_key: '214fce8e1f0329d7b9d8bf1002dc9fd2',
-    //     },
-    //     headers: {
-    //       'X-RapidAPI-Key':
-    //         '3a316b5327mshd645ab47cc34fdap19bb56jsn5c6e5a76aa2f',
-    //       'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com',
-    //     },
-    //   };
-    //
-    //   axios
-    //     .request(options)
-    //     .then(function (response) {
-    //       setProducts(response.data.results);
-    //     })
-    //     .catch(function (error) {});
-    // }
+    if (searchText !== undefined) {
+      searchString = searchText;
+    }
+    if (searchString !== '') {
+      const options = {
+        method: 'GET',
+        url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
+        params: {
+          api_key: '214fce8e1f0329d7b9d8bf1002dc9fd2',
+        },
+        headers: {
+          'X-RapidAPI-Key':
+            '3a316b5327mshd645ab47cc34fdap19bb56jsn5c6e5a76aa2f',
+          'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com',
+        },
+      };
+
+      axios
+        .request(options)
+        .then(function (response) {
+          setProducts(response.data.results);
+        })
+        .catch(function (error) {});
+    }
   };
 
   useEffect(() => {

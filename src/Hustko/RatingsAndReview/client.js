@@ -60,7 +60,7 @@ const ratingsAndReview = [{
     }];
 
 export const GetRatingsAndReviewBasedOnProductId = async (id) => {
-    const data = await axios.get(GET_RATINGS_AND_REVIEW_BY_PRODUCT_ID_URL + `/${id}`);
+    const data = await axios.get(`${GET_RATINGS_AND_REVIEW_BY_PRODUCT_ID_URL}/${id}`);
     console.log("ratings",data.data.ratingsAndReviews);
     return ratingsAndReview;
 };
