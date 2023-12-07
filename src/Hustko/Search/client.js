@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_SARK || 'http://localhost:4000/api';
 
 const GET_PRODUCTS_FROM_DB_URL = `${API_URL}/search-products`;
 
-const GET_ONE_PRODUCT_URL = `${API_URL}/product`;
+const GET_ONE_PRODUCT_URL = `${API_URL}/products`;
 
 export const SearchProductsInDatabase = async (pname) => {
   const data = await axios.post(GET_PRODUCTS_FROM_DB_URL, {
@@ -14,8 +14,7 @@ export const SearchProductsInDatabase = async (pname) => {
 };
 
 export const GetOneProduct = async (id) => {
-  const data = await axios.post(GET_ONE_PRODUCT_URL, {
-    id,
-  });
+  const data = await axios.get(GET_ONE_PRODUCT_URL + `/${id}`);
+  console.log(data.data.products);
   return data.data.products;
 };
