@@ -10,7 +10,7 @@ function App() {
       <HashRouter>
         <div>
           <Routes>
-            <Route path="/" element={<Navigate to="/Hustko" />} />
+            <Route path="/" element={<Navigate to="/Login" />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Hustko/*" element={<Hustko />} />
           </Routes>
