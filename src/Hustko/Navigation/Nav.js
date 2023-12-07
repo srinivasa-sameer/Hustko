@@ -9,7 +9,7 @@ function Nav() {
         <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <Link to="/" class="nav-link active fs-4">
+              <Link to="/Hustko" class="nav-link active fs-4">
                 <BiSolidDog
                   style={{ fontSize: "1.2em" }}
                   className="mx-2 mb-1"
@@ -63,7 +63,7 @@ function Nav() {
               </ul>
             </li>
             <li class="nav-item">
-              <Link to="/Hustko/Profile/121" class="nav-link active fs-5">
+              <Link to="/Hustko/Profile" class="nav-link active fs-5">
                 Profile
               </Link>
             </li>

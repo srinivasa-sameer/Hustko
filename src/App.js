@@ -1,7 +1,7 @@
 import "./App.css";
 import { HashRouter } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
-import Login from "./Login";
+import Login from "./Hustko/Login";
 import Hustko from "./Hustko";
 
 function App() {
