@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {useNavigate, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {SearchProductsInDatabase} from "./client";
 import Card from "../Main/card";
@@ -57,14 +57,16 @@ const Search = () => {
             style={{ marginTop: '1 rem' }}
         >
             {products.map((product) => (
-                <div>
-                    <Card
-                        title={""}
-                        description={product.name}
-                        price={product.price}
-                        image={product.image}
-                    />
-                </div>
+                <Link to={`/Hustko/ExternalDetails/${product.asin}`}>
+                    <div>
+                        <Card
+                            title={""}
+                            description={product.name}
+                            price={product.price}
+                            image={product.image}
+                        />
+                    </div>
+                </Link>
             ))}
             {databaseProducts.map((product) => (
                 <div>
