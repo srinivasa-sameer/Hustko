@@ -2,7 +2,7 @@ import './card.css';
 import { Link } from 'react-router-dom';
 const Card = (props) => {
   return (
-    <div className="card m-1">
+    <div className="card m-2">
       <img className="card-img-top" src={props.image} alt="product image" />
       <div className="card-body">
         <Link className="link" to="">
