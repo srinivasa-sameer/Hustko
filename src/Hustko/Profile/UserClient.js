@@ -24,8 +24,8 @@ export const createUser = async (user) => {
   const response = await request.post(`${USERS_API}`, user);
   return response.data;
 };
-export const findUserById = async (id) => {
-  const response = await request.get(`${USERS_API}/${id}`);
+export const findUserById = async (userId) => {
+  const response = await request.get(`${USERS_API}/${userId}`);
   return response.data;
 };
 export const deleteUser = async (user) => {
@@ -38,5 +38,21 @@ export const signup = async (credentials) => {
 };
 export const signout = async () => {
   const response = await request.post(`${USERS_API}/signout`);
+  return response.data;
+};
+// export const getFavoriteItems = async (user) => {
+//   const response = await request.get(`${USERS_API}/favorite/${user._id}`);
+//   return response.data;
+// };
+export const addFavoriteItem = async (user, item) => {
+  const response = await request.put(
+    `${USERS_API}/favoriteadd/${user._id}/${item._id}`
+  );
+  return response.data;
+};
+export const removeFavoriteItem = async (user, item) => {
+  const response = await request.put(
+    `${USERS_API}/favoriteremove/${user._id}/${item._id}`
+  );
   return response.data;
 };
