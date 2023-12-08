@@ -4,6 +4,7 @@ import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 import {IoStarSharp} from "react-icons/io5";
 import {IoIosStarHalf} from "react-icons/io";
+import RatingsAndReviews from "../RatingsAndReview";
 
 const ExternalProducts = () => {
     const [productTitle, setproductTitle] = useState([]);
@@ -136,6 +137,7 @@ const ExternalProducts = () => {
                     </div>
                 </li>
                 </ul>
+                <RatingsAndReviews productId={product_id}></RatingsAndReviews>
             </div>
         </div>
     );

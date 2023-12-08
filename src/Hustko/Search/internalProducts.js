@@ -5,6 +5,7 @@ import {Link, useParams} from "react-router-dom";
 import {IoStarSharp} from "react-icons/io5";
 import {IoIosStarHalf} from "react-icons/io";
 import {GetOneProduct, getOneProduct} from "./client";
+import RatingsAndReviews from "../RatingsAndReview";
 
 const InternalProducts = () => {
     const [productTitle, setproductTitle] = useState([]);
@@ -120,6 +121,7 @@ const InternalProducts = () => {
                         </div>
                     </li>
                 </ul>
+                <RatingsAndReviews productId={product_id}></RatingsAndReviews>
             </div>
         </div>
     );
