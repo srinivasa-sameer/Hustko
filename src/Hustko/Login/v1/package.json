@@ -1,0 +1,9 @@
+{
+    "type": "module",
+    "name": "kanbas-node-server-app",
+    "scripts": {
+        "dev": "nodemon v1/server.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    }
+}
