@@ -58,7 +58,7 @@ function Nav() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <span class="me-2">{account.firstName}</span>
+                {/* <span class="me-2">{account.firstName}</span> */}
                 Settings
               </button>
               <ul class="dropdown-menu ">
