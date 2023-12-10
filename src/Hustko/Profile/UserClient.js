@@ -2,7 +2,8 @@ import axios from "axios";
 const request = axios.create({
   withCredentials: true,
 });
-export const BASE_API = process.env.REACT_APP_BASE_API_URL || 'http://localhost:4000';
+export const BASE_API =
+  process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
 export const USERS_API = `${BASE_API}/api/users`;
 export const signin = async (credentials) => {
   const response = await request.post(`${USERS_API}/signin`, credentials);
@@ -24,9 +25,8 @@ export const createUser = async (user) => {
   const response = await request.post(`${USERS_API}`, user);
   return response.data;
 };
-export const findUserById = async (id) => {
-  console.log("id"+id);
-  const response = await request.get(`${USERS_API}/${id}`);
+export const findUserById = async (userId) => {
+  const response = await request.get(`${USERS_API}/${userId}`);
   return response.data;
 };
 export const deleteUser = async (user) => {
@@ -39,5 +39,17 @@ export const signup = async (credentials) => {
 };
 export const signout = async () => {
   const response = await request.post(`${USERS_API}/signout`);
+  return response.data;
+};
+export const addFavoriteItem = async (user, item) => {
+  const response = await request.put(
+    `${USERS_API}/favoriteadd/${user._id}/${item._id}`
+  );
+  return response.data;
+};
+export const removeFavoriteItem = async (user, item) => {
+  const response = await request.put(
+    `${USERS_API}/favoriteremove/${user._id}/${item._id}`
+  );
   return response.data;
 };

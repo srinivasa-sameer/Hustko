@@ -3,16 +3,18 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { FcLike, FcDislike } from "react-icons/fc";
 import * as client from "./UserClient";
+import * as productClient from "../Search/client";
+import Card from "../Main/Card/card";
 
 function Profile() {
   const { userId } = useParams();
   const [account, setAccount] = useState(null);
+  const [favoriteItems, setFavoriteItems] = useState([]);
   const navigate = useNavigate();
   const reformattedDate = (rawDate) => {
     const unformattedDate = new Date(rawDate);
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     const formattedDate = unformattedDate.toLocaleDateString("en-CA", options);
-    console.log(formattedDate);
     return formattedDate;
   };
   const fetchAccount = async () => {
@@ -23,72 +25,101 @@ function Profile() {
     const user = await client.findUserById(userId);
     setAccount(user);
   };
+  const getFavoriteItems = async () => {
+    if (account) {
+      for (const favoriteItemId of account.favoriteItems) {
+        const item = await getFavoriteItem(favoriteItemId);
+        setFavoriteItems((favoriteItems) => [...favoriteItems, item]);
+      }
+    }
+  };
+  const getFavoriteItem = async (itemId) => {
+    const item = await productClient.GetOneProduct(itemId);
+    return item;
+  };
   useEffect(() => {
     if (userId) {
       findUserById(userId);
     } else {
       fetchAccount();
     }
-  }, [userId]);
-  // const [likedItems, setLikedItems] = useState(["Item1", "Item2", "Item3"]);
+    getFavoriteItems();
+  }, [userId, getFavoriteItems]);
+
   // const [isLiked, setLiked] = useState(true);
   return (
-    <div className="container">
-      <h1>Manage Profile</h1>
-      <hr />
-      {account && (
-        <div>
-          {!userId && (
-            <Link
-              to={`/Hustko/Profile/ProfileEditor`}
-              className="btn btn-outline-primary m-4"
-            >
-              <BiSolidEditAlt className="me-2 mb-1" size={21} />
-              Edit Profile
-            </Link>
-          )}
+    <div>
+      <div className="container">
+        <h1>Manage Profile</h1>
+        <hr />
+        {account && (
           <div>
-            <ul className="list-group w-75 ms-4">
-              {!userId && (
+            {!userId && (
+              <Link
+                to={`/Hustko/Profile/ProfileEditor`}
+                className="btn btn-outline-primary m-4 float-end"
+              >
+                <BiSolidEditAlt className="me-2 mb-1" size={21} />
+                Edit Profile
+              </Link>
+            )}
+            <div className="d-flex justify-content-center">
+              <ul className="list-group w-75 ms-4">
+                {!userId && (
+                  <li className="list-group-item">
+                    <strong>Email: </strong>
+                    {account.email}
+                  </li>
+                )}
                 <li className="list-group-item">
-                  <strong>Email: </strong>
-                  {account.email}
+                  <strong>First Name: </strong>
+                  {account.firstName}
                 </li>
-              )}
-              <li className="list-group-item">
-                <strong>First Name: </strong>
-                {account.firstName}
-              </li>
-              <li className="list-group-item">
-                <strong>Last Name: </strong>
-                {account.lastName}
-              </li>
-              {!userId && (
                 <li className="list-group-item">
-                  <strong>Date of Birth: </strong>
-                  {reformattedDate(account.dob)}
+                  <strong>Last Name: </strong>
+                  {account.lastName}
                 </li>
-              )}
-              <li className="list-group-item">
-                <strong>Role: </strong>
-                {account.role}
-              </li>
-              {!userId && (
+                {!userId && (
+                  <li className="list-group-item">
+                    <strong>Date of Birth: </strong>
+                    {reformattedDate(account.dob)}
+                  </li>
+                )}
                 <li className="list-group-item">
-                  <strong>Mobile Number: </strong>
-                  {account.mobile}
+                  <strong>Role: </strong>
+                  {account.role}
                 </li>
-              )}
-              {!userId && (
-                <li className="list-group-item">
-                  <strong>Primary Address: </strong>
-                  {account.primAddress}
-                </li>
-              )}
-              {/* <li className="list-group-item">
+                {!userId && (
+                  <li className="list-group-item">
+                    <strong>Mobile Number: </strong>
+                    {account.mobile}
+                  </li>
+                )}
+                {!userId && (
+                  <li className="list-group-item">
+                    <strong>Primary Address: </strong>
+                    {account.primAddress}
+                  </li>
+                )}
+                {account && (
+                  <li className="list-group-item">
+                    <strong>Favorite Items: </strong>
+                    {favoriteItems.map((product) => (
+                      <div>
+                        <Card
+                          title={product.manufacturer}
+                          description={product.name}
+                          price={product.price}
+                          image={product.image}
+                        />
+                      </div>
+                    ))}
+                  </li>
+                )}
+                {/* <li className="list-group-item">
               <strong>Liked Items: </strong>
               <div class="row row-cols-1 row-cols-md-2 g-4">
-                {likedItems.map((item) => (
+                {favoriteItems.map((item) => (
                   <div class="col">
                     <div class="card">
                       <img
@@ -123,10 +154,11 @@ function Profile() {
                 ))}
               </div>
             </li> */}
-            </ul>
+              </ul>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

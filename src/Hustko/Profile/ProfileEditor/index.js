@@ -12,7 +12,8 @@ function ProfileEditor() {
       unformattedDate.getMonth() + 1
     )
       .toString()
-      .padStart(2, "0")}-${(unformattedDate.getDate() + 1)
+      .padStart(2, "0")}-${unformattedDate
+      .getDate()
       .toString()
       .padStart(2, "0")}`;
     return formattedDate;
@@ -177,7 +178,7 @@ function ProfileEditor() {
             />
           </div>
         </div>
-        <div class="row">
+        {/* <div class="row">
           <div class="col-4 text-end pt-2">
             <label for="select-one-assignment-group">Assignment Group</label>
           </div>
@@ -191,7 +192,7 @@ function ProfileEditor() {
               <option value="PROJECT">PROJECT</option>
             </select>
           </div>
-        </div>
+        </div> */}
         <hr />
         <div className="float-end">
           <Link to={"/Hustko/Profile"} className="btn btn-danger me-2">
