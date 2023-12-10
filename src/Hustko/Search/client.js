@@ -1,20 +1,36 @@
-import axios from 'axios';
+import axios from "axios";
+const request = axios.create({
+  withCredentials: true,
+});
 
-const API_URL = process.env.REACT_APP_API_SARK || 'http://localhost:4000/api';
+const API_URL = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
 
-const GET_PRODUCTS_FROM_DB_URL = `${API_URL}/search-products`;
+const GET_PRODUCTS_FROM_DB_URL = `${API_URL}/api/search-products`;
 
-const GET_ONE_PRODUCT_URL = `${API_URL}/products`;
+const GET_ONE_PRODUCT_URL = `${API_URL}/api/products`;
 
 export const SearchProductsInDatabase = async (pname) => {
-  const data = await axios.post(GET_PRODUCTS_FROM_DB_URL, {
+  const data = await request.post(GET_PRODUCTS_FROM_DB_URL, {
     name: pname,
   });
   return data.data.products;
 };
 
 export const GetOneProduct = async (id) => {
-  const data = await axios.get(GET_ONE_PRODUCT_URL + `/${id}`);
+  const data = await request.get(GET_ONE_PRODUCT_URL + `/${id}`);
   console.log(data.data.products);
   return data.data.products;
+};
+
+export const addLikedByUsers = async (item, user) => {
+  const response = await request.put(
+    `${GET_ONE_PRODUCT_URL}/likeduseradd/${item._id}/${user._id}`
+  );
+  return response.data;
+};
+export const removeLikedByUsers = async (item, user) => {
+  const response = await request.put(
+    `${GET_ONE_PRODUCT_URL}/likeduserremove/${item._id}/${user._id}`
+  );
+  return response.data;
 };

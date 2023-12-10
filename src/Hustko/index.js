@@ -11,8 +11,8 @@ function Hustko() {
     <div>
       <Nav />
       <Routes>
-        <Route path="/" element={<Navigate to="Main" />} />
-        <Route path="Main/*" element={<Main />} />
+        <Route path="/" element={<Navigate to="home" />} />
+        <Route path="home/*" element={<Main />} />
         <Route path="Profile" element={<Profile />} />
         <Route path="Search" element={<Main />} />
         <Route

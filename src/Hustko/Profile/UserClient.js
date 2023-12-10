@@ -40,10 +40,6 @@ export const signout = async () => {
   const response = await request.post(`${USERS_API}/signout`);
   return response.data;
 };
-// export const getFavoriteItems = async (user) => {
-//   const response = await request.get(`${USERS_API}/favorite/${user._id}`);
-//   return response.data;
-// };
 export const addFavoriteItem = async (user, item) => {
   const response = await request.put(
     `${USERS_API}/favoriteadd/${user._id}/${item._id}`

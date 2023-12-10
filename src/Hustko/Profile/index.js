@@ -26,13 +26,11 @@ function Profile() {
     setAccount(user);
   };
   const getFavoriteItems = async () => {
-    {
-      account &&
-        account.favoriteItems.forEach((favoriteItemId) => {
-          getFavoriteItem(favoriteItemId).then((item) => {
-            setFavoriteItems((favoriteItems) => [...favoriteItems, item]);
-          });
-        });
+    if (account) {
+      for (const favoriteItemId of account.favoriteItems) {
+        const item = await getFavoriteItem(favoriteItemId);
+        setFavoriteItems((favoriteItems) => [...favoriteItems, item]);
+      }
     }
   };
   const getFavoriteItem = async (itemId) => {
@@ -46,7 +44,7 @@ function Profile() {
       fetchAccount();
     }
     getFavoriteItems();
-  }, [userId]);
+  }, [userId, getFavoriteItems]);
 
   // const [isLiked, setLiked] = useState(true);
   return (
@@ -68,12 +66,12 @@ function Profile() {
             <div className="d-flex justify-content-center">
               <ul className="list-group w-75 ms-4">
                 {!userId && (
-                  <li className="list-group-item d-flex justify-content-left">
+                  <li className="list-group-item">
                     <strong>Email: </strong>
                     {account.email}
                   </li>
                 )}
-                <li className="list-group-item d-flex justify-content-left">
+                <li className="list-group-item">
                   <strong>First Name: </strong>
                   {account.firstName}
                 </li>
