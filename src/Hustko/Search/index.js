@@ -56,7 +56,7 @@ const Search = () => {
       className="container d-flex flex-row flex-wrap"
       style={{ marginTop: '1 rem' }}
     >
-      {products.map((product) => (
+      {products?.map((product) => (
         <Link to={`/Hustko/ExternalDetails/${product.asin}`}>
           <div>
             <Card
@@ -68,7 +68,7 @@ const Search = () => {
           </div>
         </Link>
       ))}
-      {databaseProducts.map((product) => (
+      {databaseProducts?.map((product) => (
         <Link to={`/Hustko/InternalDetails/${product._id}`}>
           <div>
             <Card

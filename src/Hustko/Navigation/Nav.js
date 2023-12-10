@@ -5,6 +5,8 @@ import "./Nav.css";
 import * as userclient from "../Profile/UserClient";
 function Nav() {
   const { pathname } = useLocation();
+  const [searchText, setSearchText] = useState("");
+
   const [account, setAccount] = useState(null);
   const fetchAccount = async () => {
     const account = await userclient.account();
@@ -34,10 +36,14 @@ function Nav() {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
             />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
+            <Link to={`/Hustko/Search/${searchText}`}>
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </Link>
           </form>
         </div>
         {/* {account && (
