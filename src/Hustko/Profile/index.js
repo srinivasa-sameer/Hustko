@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { BiSolidEditAlt } from "react-icons/bi";
-import { FcLike, FcDislike } from "react-icons/fc";
-import * as client from "./UserClient";
-import * as productClient from "../Search/client";
-import Card from "../Main/Card/card";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { BiSolidEditAlt } from 'react-icons/bi';
+import { FcLike, FcDislike } from 'react-icons/fc';
+import * as client from './UserClient';
+import * as productClient from '../Search/client';
+import Card from '../Main/Card/card';
 
 function Profile() {
   const { userId } = useParams();
@@ -13,8 +13,8 @@ function Profile() {
   const navigate = useNavigate();
   const reformattedDate = (rawDate) => {
     const unformattedDate = new Date(rawDate);
-    const options = { year: "numeric", month: "numeric", day: "numeric" };
-    const formattedDate = unformattedDate.toLocaleDateString("en-CA", options);
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const formattedDate = unformattedDate.toLocaleDateString('en-CA', options);
     return formattedDate;
   };
   const fetchAccount = async () => {
@@ -44,7 +44,7 @@ function Profile() {
       fetchAccount();
     }
     getFavoriteItems();
-  }, [userId, getFavoriteItems]);
+  }, [userId]);
 
   // const [isLiked, setLiked] = useState(true);
   return (
