@@ -25,7 +25,6 @@ export const createUser = async (user) => {
   return response.data;
 };
 export const findUserById = async (id) => {
-  console.log("id"+id);
   const response = await request.get(`${USERS_API}/${id}`);
   return response.data;
 };

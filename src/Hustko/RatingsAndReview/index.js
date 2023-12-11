@@ -2,14 +2,42 @@ import React, { useState, useEffect } from "react";
 
 import {IoStarSharp} from "react-icons/io5";
 import {IoIosStarHalf} from "react-icons/io";
-import { GetRatingsAndReviewBasedOnProductId} from "./client";
-import {findUserById} from "../Profile/UserClient";
-import {SearchProductsInDatabase} from "../Search/client";
+import {
+    GetRatingsAndReviewBasedOnProductId,
+    UpdateRatingsAndReviewBasedOnProductId
+} from "./client";
+import {account, findUserById} from "../Profile/UserClient";
 import {Link} from "react-router-dom";
 
 const RatingsAndReviews = ({productId}) => {
     const [ratingsAndReviews, setRatingsAndReviews] = useState([]);
     const [reviewsWithUserNames, setReviewsWithUserNames] = useState([]);
+    const [ratingAndReviewData, setRatingAndReviewData] =
+        useState({
+                     productId: productId,
+                     userId: "",
+                     ratings: 0,
+                     review: ""});
+
+    const setCurrentUser = async () => {
+        try {
+            const userId = await account();
+            setRatingAndReviewData({...ratingAndReviewData, "userId": userId._id});
+        } catch (error) {
+            console.error('Error fetching current user:', error);
+        }
+    };
+
+    const addRatingAndReview = async () => {
+        await UpdateRatingsAndReviewBasedOnProductId(ratingAndReviewData);
+        console.log(ratingAndReviewData);
+        setRatingsAndReviews([...ratingsAndReviews, ratingAndReviewData]);
+    };
+
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setRatingAndReviewData({...ratingAndReviewData, [name]: value});
+    }
 
     const getTotalRatingsAndReview = () => {
         return ratingsAndReviews.length;
@@ -51,7 +79,6 @@ const RatingsAndReviews = ({productId}) => {
                 }
             })
         );
-
         setReviewsWithUserNames(updatedReviews);
     };
 
@@ -64,6 +91,10 @@ const RatingsAndReviews = ({productId}) => {
             fetchAndRenderReviews();
         }
     }, [ratingsAndReviews]);
+
+    useEffect(() => {
+        setCurrentUser()
+    }, []);
 
     return (
         <div>
@@ -78,7 +109,22 @@ const RatingsAndReviews = ({productId}) => {
                     </div>
                     <div className="col-md-8">
             <span>
-              <ul className="list-group">
+                <div className="container justify-content-end">
+                     <input className="form-control m-2"
+                            type="number"
+                            name="ratings"
+                            placeholder="ratings"
+                            value={ratingAndReviewData.ratings}
+                            onChange={handleChange}/>
+                      <input className="form-control m-2"
+                             type="text"
+                             name="review"
+                             placeholder="review"
+                             value={ratingAndReviewData.review}
+                             onChange={handleChange}/>
+                      <button type="button" className="btn btn-warning m-2" onClick={addRatingAndReview} >Add Rating And Review</button>
+                    </div>
+              <ul className="list-group m-2">
                 {reviewsWithUserNames.map((ratingAndReview) => (
                     <li className="list-group-item" key={ratingAndReview._id}>
                         <Link to={`/Hustko/Profile/${ratingAndReview.userId}`}><p style={{ textAlign: "left" }}>{ratingAndReview.userName.firstName}</p></Link>
