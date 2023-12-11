@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { BiSolidEditAlt } from "react-icons/bi";
-import { FcLike, FcDislike } from "react-icons/fc";
 import * as client from "./UserClient";
 import * as productClient from "../Search/client";
+import * as ratingsReviewClient from "../RatingsAndReview/client";
 import Card from "../Main/Card/card";
+import { IoStarSharp } from "react-icons/io5";
+import { IoIosStarHalf } from "react-icons/io";
 
 function Profile() {
   const { userId } = useParams();
   const [account, setAccount] = useState(null);
   const [favoriteItems, setFavoriteItems] = useState([]);
+  const [ratingsAndReviews, setRatingsAndReviews] = useState([]);
+  const [
+    ratingsAndReviewsWithProductNames,
+    setRatingsAndReviewsWithProductNames,
+  ] = useState([]);
   const navigate = useNavigate();
   const reformattedDate = (rawDate) => {
     const unformattedDate = new Date(rawDate);
@@ -37,16 +44,59 @@ function Profile() {
     const item = await productClient.GetOneProduct(itemId);
     return item;
   };
+  const getRatingsAndReviews = async () => {
+    if (account) {
+      const currentRatingAndReviews =
+        await ratingsReviewClient.GetRatingsAndReviewBasedOnUserId(account);
+      setRatingsAndReviews(currentRatingAndReviews);
+    }
+  };
+
+  const fetchAndRenderReviews = async () => {
+    getRatingsAndReviews();
+    const updatedReviews = await Promise.all(
+      ratingsAndReviews.map(async (ratingAndReview) => {
+        try {
+          const product = await productClient.GetOneProduct(
+            ratingAndReview.productId
+          );
+          return { ...ratingAndReview, productName: product };
+        } catch (error) {
+          console.error("Error fetching product:", error);
+          return { ...ratingAndReview, productName: "Unknown Product" };
+        }
+      })
+    );
+
+    setRatingsAndReviewsWithProductNames(updatedReviews);
+  };
+
   useEffect(() => {
     if (userId) {
       findUserById(userId);
     } else {
       fetchAccount();
     }
-    getFavoriteItems();
-  }, [userId, getFavoriteItems]);
+  }, [userId]);
 
-  // const [isLiked, setLiked] = useState(true);
+  useEffect(() => {
+    if (ratingsAndReviews.length > 0) {
+      fetchAndRenderReviews();
+    }
+  }, [ratingsAndReviews]);
+
+  const generateStars = (stars) => {
+    let starIcons = [];
+    let givenStars = 0;
+    for (let i = 1; i <= stars; i++) {
+      starIcons.push(<IoStarSharp style={{ color: "gold" }} />);
+      givenStars = givenStars + 1;
+    }
+    if (stars - givenStars !== 0) {
+      starIcons.push(<IoIosStarHalf style={{ color: "gold" }} />);
+    }
+    return <div>{starIcons}</div>;
+  };
   return (
     <div>
       <div className="container">
@@ -101,7 +151,7 @@ function Profile() {
                     {account.primAddress}
                   </li>
                 )}
-                {account && (
+                {/* {account && (
                   <li className="list-group-item">
                     <strong>Favorite Items: </strong>
                     {favoriteItems.map((product) => (
@@ -115,46 +165,61 @@ function Profile() {
                       </div>
                     ))}
                   </li>
-                )}
-                {/* <li className="list-group-item">
-              <strong>Liked Items: </strong>
-              <div class="row row-cols-1 row-cols-md-2 g-4">
-                {favoriteItems.map((item) => (
-                  <div class="col">
-                    <div class="card">
-                      <img
-                        src="/logo192.png"
-                        class="card-img-top"
-                        alt="..."
-                      ></img>
-                      <div class="card-body">
-                        {isLiked && (
-                          <FcLike
-                            className="float-end"
-                            size={30}
-                            onClick={() => setLiked(!isLiked)}
-                          />
-                        )}
-                        {!isLiked && (
-                          <FcDislike
-                            className="float-end"
-                            size={30}
-                            onClick={() => setLiked(!isLiked)}
-                          />
-                        )}
-                        <h5 class="card-title">{item}</h5>
-                        <p class="card-text">
-                          This is a longer card with supporting text below as a
-                          natural lead-in to additional content. This content is a
-                          little bit longer.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </li> */}
+                )} */}
               </ul>
+            </div>
+            <div className="d-flex justify-content-center">
+              <button
+                className="btn btn-warning my-4 mx-3"
+                onClick={fetchAndRenderReviews}
+              >
+                Show Ratings and Reviews
+              </button>
+              <button
+                className="btn btn-warning my-4 mx-3"
+                onClick={getFavoriteItems}
+              >
+                Get Liked Items
+              </button>
+            </div>
+            <div className="m-4">
+              <h4 className="d-flex justify-content-left">
+                Ratings and Reviews:{" "}
+              </h4>
+              {ratingsAndReviewsWithProductNames && (
+                <ul className="list-group">
+                  {ratingsAndReviewsWithProductNames.map((ratingAndReview) => (
+                    <li className="list-group-item" key={ratingAndReview._id}>
+                      <Link
+                        to={`/Hustko/InternalDetails/${ratingAndReview.productId}`}
+                      >
+                        <p style={{ textAlign: "left" }}>
+                          {ratingAndReview.productName.name}
+                        </p>
+                      </Link>
+                      <p style={{ textAlign: "left" }}>
+                        {generateStars(ratingAndReview.ratings)}
+                      </p>
+                      <p style={{ textAlign: "left" }}>
+                        {ratingAndReview.review}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className="w-25 m-4">
+              <h4 className="d-flex justify-content-left">Favorite Items: </h4>
+              {favoriteItems.map((product) => (
+                <div>
+                  <Card
+                    title={product.manufacturer}
+                    description={product.name}
+                    price={product.price}
+                    image={product.image}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         )}
