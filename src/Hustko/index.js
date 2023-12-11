@@ -1,20 +1,24 @@
-import { Route, Routes, Navigate } from 'react-router';
-import Nav from './Navigation/Nav';
-import Main from './Main';
-import Profile from './Profile';
-import Search from './Search';
-import ProfileEditor from './Profile/ProfileEditor';
-import ExternalProducts from './Search/externalProducts';
-import InternalProducts from './Search/internalProducts';
+import { Route, Routes, Navigate } from "react-router";
+import Nav from "./Navigation/Nav";
+import Main from "./Main";
+import Profile from "./Profile";
+import Search from "./Search";
+import Admin from "./Admin";
+import Supplier from "./Supplier";
+import ProfileEditor from "./Profile/ProfileEditor";
+import ExternalProducts from "./Search/externalProducts";
+import InternalProducts from "./Search/internalProducts";
 function Hustko() {
   return (
     <div>
       <Nav />
       <Routes>
-        <Route path="/" element={<Navigate to="Main" />} />
-        <Route path="Main/*" element={<Main />} />
+        <Route path="/" element={<Navigate to="home" />} />
+        <Route path="home/*" element={<Main />} />
         <Route path="Profile" element={<Profile />} />
         <Route path="Search" element={<Main />} />
+        <Route path="Admin" element={<Admin />} />
+        <Route path="Supplier" element={<Supplier />} />
         <Route
           path="ExternalDetails/:product_id"
           element={<ExternalProducts />}
@@ -25,10 +29,7 @@ function Hustko() {
         />
         <Route path="Search/:searchText" element={<Search />} />
         <Route path="Profile/:userId" element={<Profile />} />
-        <Route
-          path="Profile/:userId/ProfileEditor"
-          element={<ProfileEditor />}
-        />
+        <Route path="Profile/ProfileEditor" element={<ProfileEditor />} />
       </Routes>
     </div>
   );
