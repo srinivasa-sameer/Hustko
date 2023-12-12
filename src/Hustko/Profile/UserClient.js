@@ -25,8 +25,8 @@ export const createUser = async (user) => {
   const response = await request.post(`${USERS_API}`, user);
   return response.data;
 };
-export const findUserById = async (userId) => {
-  const response = await request.get(`${USERS_API}/${userId}`);
+export const findUserById = async (id) => {
+  const response = await request.get(`${USERS_API}/${id}`);
   return response.data;
 };
 export const deleteUser = async (user) => {
