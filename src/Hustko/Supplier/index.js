@@ -45,6 +45,16 @@ const Supplier = () => {
           </div>
           <br />
 
+          <div className="row">
+            <div className="col-2">
+              <label>Product Quantity:</label>
+            </div>
+            <div className="col-10">
+              <input type="number" className="form-control" />
+            </div>
+          </div>
+          <br />
+
           <div className="float-end">
             <button class="btn btn-success addButton">Add Product</button>
             <button class="btn btn-warning">Update Product</button>

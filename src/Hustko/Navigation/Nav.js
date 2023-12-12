@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { BiSolidDog } from "react-icons/bi";
-import "./Nav.css";
-import * as userclient from "../Profile/UserClient";
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { BiSolidDog } from 'react-icons/bi';
+import './Nav.css';
+import * as userclient from '../Profile/UserClient';
 function Nav() {
   const { pathname } = useLocation();
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   const [account, setAccount] = useState(null);
   const fetchAccount = async () => {
@@ -14,13 +14,13 @@ function Nav() {
   };
   return (
     <div>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <Link to="/Hustko" class="nav-link active fs-4">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+        <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to="/Hustko" className="nav-link active fs-4">
                 <BiSolidDog
-                  style={{ fontSize: "1.2em" }}
+                  style={{ fontSize: '1.2em' }}
                   className="mx-2 mb-1"
                 />
                 Hustko
@@ -28,10 +28,10 @@ function Nav() {
             </li>
           </ul>
         </div>
-        <div class="mx-auto order-0">
-          <form class="d-flex" role="search">
+        <div className="mx-auto order-0">
+          <form className="d-flex" role="search">
             <input
-              class="form-control me-2"
+              className="form-control me-2"
               size="300"
               type="search"
               placeholder="Search"
@@ -40,7 +40,7 @@ function Nav() {
               onChange={(e) => setSearchText(e.target.value)}
             />
             <Link to={`/Hustko/Search/${searchText}`}>
-              <button class="btn btn-outline-success" type="submit">
+              <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
             </Link>
@@ -49,38 +49,38 @@ function Nav() {
         {/* {account && (
         )} */}
 
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-          <ul class="navbar-nav ms-auto mx-2 mb-2 mb-lg-0">
-            <li class="nav-item hustko-dropdown mt-1">
+        <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+          <ul className="navbar-nav ms-auto mx-2 mb-2 mb-lg-0">
+            <li className="nav-item hustko-dropdown mt-1">
               <button
-                class="nav-link active dropdown btn btn-outline-dark dropdown-toggle"
+                className="nav-link active dropdown btn btn-outline-dark dropdown-toggle"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {/* <span class="me-2">{account.firstName}</span> */}
+                {/* <span className="me-2">{account.firstName}</span> */}
                 Settings
               </button>
-              <ul class="dropdown-menu ">
+              <ul className="dropdown-menu ">
                 <li>
-                  <Link class="dropdown-item" to="/Hustko/Addresses">
+                  <Link className="dropdown-item" to="/Hustko/Addresses">
                     All Addresses
                   </Link>
                 </li>
                 <li>
-                  <Link class="dropdown-item" to="/Hustko/LikedItems">
+                  <Link className="dropdown-item" to="/Hustko/LikedItems">
                     Liked Items
                   </Link>
                 </li>
                 <li>
-                  <Link class="dropdown-item" to="/Login">
+                  <Link className="dropdown-item" to="/Login">
                     Sign Out
                   </Link>
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
-              <Link to="/Hustko/Profile" class="nav-link active fs-5">
+            <li className="nav-item">
+              <Link to="/Hustko/Profile" className="nav-link active fs-5">
                 Profile
               </Link>
             </li>
