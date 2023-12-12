@@ -13,6 +13,7 @@ function Profile() {
   const [account, setAccount] = useState(null);
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [ratingsAndReviews, setRatingsAndReviews] = useState([]);
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [
     ratingsAndReviewsWithProductNames,
     setRatingsAndReviewsWithProductNames,
@@ -83,7 +84,7 @@ function Profile() {
     if (ratingsAndReviews.length > 0) {
       fetchAndRenderReviews();
     }
-  }, [ratingsAndReviews]);
+  }, [account]);
 
   const generateStars = (stars) => {
     let starIcons = [];
@@ -97,6 +98,11 @@ function Profile() {
     }
     return <div>{starIcons}</div>;
   };
+
+  const disableButton = () => {
+    setButtonDisabled(true);
+  };
+
   return (
     <div>
       <div className="container">
@@ -177,7 +183,11 @@ function Profile() {
               </button>
               <button
                 className="btn btn-warning my-4 mx-3"
-                onClick={getFavoriteItems}
+                onClick={() => {
+                  getFavoriteItems();
+                  disableButton();
+                }}
+                disabled={isButtonDisabled}
               >
                 Get Liked Items
               </button>
