@@ -1,23 +1,24 @@
 import { useState } from 'react';
 import './card.css';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import * as searchClient from '../../Search/client';
 
 const Card = (props) => {
-  const [favorite, setFavorite] = useState(true);
-  const addToFavorite = () => {
+  const [favorite, setFavorite] = useState(false);
+  const toggleFavorite = () => {
     setFavorite(!favorite);
   };
   return (
     <div className="card m-2">
       <img className="card-img-top" src={props.image} alt="product image" />
       <div className="card-body">
-        {favorite ? (
+        {!favorite ? (
           <FaRegHeart
             className="float-end heartButton"
-            onClick={addToFavorite}
+            onClick={toggleFavorite}
           />
         ) : (
-          <FaHeart className="float-end heartButton" onClick={addToFavorite} />
+          <FaHeart className="float-end heartButton" onClick={toggleFavorite} />
         )}
 
         <h5 className="card-title">{props.title}</h5>

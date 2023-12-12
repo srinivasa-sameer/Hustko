@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 const request = axios.create({
   withCredentials: true,
 });
 
-const API_URL = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
+const API_URL = process.env.REACT_APP_BASE_API_URL || 'http://localhost:4000';
 
 const GET_PRODUCTS_FROM_DB_URL = `${API_URL}/api/search-products`;
 
@@ -31,6 +31,13 @@ export const addLikedByUsers = async (item, user) => {
 export const removeLikedByUsers = async (item, user) => {
   const response = await request.put(
     `${GET_ONE_PRODUCT_URL}/likeduserremove/${item._id}/${user._id}`
+  );
+  return response.data;
+};
+
+export const getProductsBySupplierId = async (supplierId) => {
+  const response = await request.get(
+    `${GET_ONE_PRODUCT_URL}/supplier/${supplierId}`
   );
   return response.data;
 };
