@@ -21,3 +21,15 @@ export const GetRatingsAndReviewBasedOnUserId = async (user) => {
   );
   return data.data.ratingsAndReviews;
 };
+
+export const UpdateRatingsAndReviewBasedOnProductId = async (
+  ratingAndReview
+) => {
+  console.log(ratingAndReview);
+  console.log(GET_RATINGS_AND_REVIEW_BY_PRODUCT_ID_URL);
+  const data = await axios.post(
+    `${GET_RATINGS_AND_REVIEW_BY_PRODUCT_ID_URL}`,
+    ratingAndReview
+  );
+  return data.data.success;
+};

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as client from './client';
+import * as SupplierClient from '../Supplier/SupplierClient';
 import {
   BsFillCheckCircleFill,
   BsPlusCircleFill,
@@ -7,13 +8,17 @@ import {
   BsPencil,
 } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import Card from '../Main/Card/card';
+
 const Admin = () => {
   const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
+
   const [user, setUser] = useState({
-    username: '',
-    password: '',
+    email: '',
     role: 'USER',
   });
+
   const createUser = async () => {
     try {
       const newUser = await client.createUser(user);
@@ -26,6 +31,12 @@ const Admin = () => {
   const fetchUsers = async () => {
     const users = await client.findAllUsers();
     setUsers(users);
+  };
+
+  const fetchProducts = async () => {
+    const products = await SupplierClient.findAllProducts();
+    setProducts(products);
+    console.log(products);
   };
 
   const selectUser = async (user) => {
@@ -55,6 +66,7 @@ const Admin = () => {
 
   useEffect(() => {
     fetchUsers();
+    fetchProducts();
   }, []);
   return (
     <div className="container-fluid">
@@ -62,7 +74,7 @@ const Admin = () => {
       <table className="table">
         <thead>
           <tr>
-            <th>Username</th>
+            <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Role</th>
@@ -72,9 +84,9 @@ const Admin = () => {
             <td className="d-flex">
               <input
                 className="form-control"
-                value={user.username}
-                placeholder="Enter UserName"
-                onChange={(e) => setUser({ ...user, username: e.target.value })}
+                value={user.email}
+                placeholder="Enter Email"
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </td>
             <td>
@@ -103,8 +115,7 @@ const Admin = () => {
               >
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
-                <option value="FACULTY">Faculty</option>
-                <option value="STUDENT">Student</option>
+                <option value="SUPPLIER">Supplier</option>
               </select>
             </td>
             <td className="text-nowrap">
@@ -123,11 +134,10 @@ const Admin = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>
-                <Link to={`/Kanbas/account/${user._id}`}>{user.username}</Link>
-              </td>
+              <td>{user.email}</td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
+              <td>{user.role}</td>
               <td className="text-nowrap">
                 <button className="btn btn-danger me-2">
                   <BsTrash3Fill onClick={() => deleteUser(user)} />
@@ -140,6 +150,24 @@ const Admin = () => {
           ))}
         </tbody>
       </table>
+
+      <hr />
+      <h2>List of Products</h2>
+      <div
+        className="container d-flex flex-row flex-wrap"
+        style={{ marginTop: '1 rem' }}
+      >
+        {products?.products?.map((product) => (
+          <div key={product.id}>
+            <Card
+              title={product.manufacturer}
+              description={product.name}
+              price={product.price}
+              image={product.image}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
