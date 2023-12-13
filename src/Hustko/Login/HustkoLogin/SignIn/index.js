@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
-import './index.css';
-import { Link, useNavigate } from 'react-router-dom';
-import * as userClient from '../../../Profile/UserClient';
+import React, { useEffect, useState } from "react";
+import "./index.css";
+import { Link, useNavigate } from "react-router-dom";
+import * as userClient from "../../../Profile/UserClient";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserSessionFetched } from "./userSessionReducer";
 
 const SignIn = (props) => {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [credentials, setCredentials] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const onLoginClick = async () => {
     try {
       const response = await userClient.signin(credentials);
-      console.log(response);
-      if (response.role === 'USER') {
-        navigate('/Hustko/home');
-      } else if (response.role === 'SUPPLIER') {
-        navigate('/Hustko/Supplier');
+      dispatch(setUserSessionFetched(true));
+      if (response.role === "USER") {
+        navigate("/Hustko/home");
+      } else if (response.role === "SUPPLIER") {
+        navigate("/Hustko/Supplier");
       } else {
-        navigate('/Hustko/Admin');
+        navigate("/Hustko/Admin");
       }
     } catch (error) {
       setError(error?.response?.data?.message);
     }
   };
+  useEffect(() => {
+    dispatch(setUserSessionFetched(false));
+  });
 
   return (
     <div className="signinBackground">
