@@ -17,7 +17,7 @@ function Hustko() {
       <Routes>
         <Route path="/" element={<Navigate to="home" />} />
         <Route path="login" element={<SignIn />} />
-        <Route path="/register" element={<RegistrationForm />} />
+        <Route path="register" element={<RegistrationForm />} />
         <Route path="home/*" element={<Main />} />
         <Route path="Profile" element={<Profile />} />
         <Route path="Search" element={<Main />} />

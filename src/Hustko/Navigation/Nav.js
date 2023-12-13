@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { BiSolidDog } from "react-icons/bi";
-import "./Nav.css";
-import * as userclient from "../Profile/UserClient";
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { BiSolidDog } from 'react-icons/bi';
+import './Nav.css';
+import * as userclient from '../Profile/UserClient';
 function Nav() {
   const { pathname } = useLocation();
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   const [account, setAccount] = useState(null);
   const fetchAccount = async () => {
@@ -20,7 +20,7 @@ function Nav() {
             <li class="nav-item">
               <Link to="/Hustko" class="nav-link active fs-4">
                 <BiSolidDog
-                  style={{ fontSize: "1.2em" }}
+                  style={{ fontSize: '1.2em' }}
                   className="mx-2 mb-1"
                 />
                 Hustko
@@ -73,7 +73,7 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <Link class="dropdown-item" to="/Login">
+                  <Link class="dropdown-item" to="/Hustko/login">
                     Sign Out
                   </Link>
                 </li>
