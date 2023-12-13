@@ -16,6 +16,11 @@ export const SearchProductsInDatabase = async (pname) => {
   return data.data.products;
 };
 
+export const getAllProducts = async () => {
+  const response = await request.get(GET_ONE_PRODUCT_URL);
+  return response.data;
+};
+
 export const GetOneProduct = async (id) => {
   const data = await request.get(GET_ONE_PRODUCT_URL + `/${id}`);
   console.log(data.data.products);

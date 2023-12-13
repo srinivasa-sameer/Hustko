@@ -7,13 +7,12 @@ import {
   BsTrash3Fill,
   BsPencil,
 } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+
 import Card from '../Main/Card/card';
 
 const Admin = () => {
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
-
   const [user, setUser] = useState({
     email: '',
     role: 'USER',
@@ -36,7 +35,6 @@ const Admin = () => {
   const fetchProducts = async () => {
     const products = await SupplierClient.findAllProducts();
     setProducts(products);
-    console.log(products);
   };
 
   const selectUser = async (user) => {
@@ -158,12 +156,13 @@ const Admin = () => {
         style={{ marginTop: '1 rem' }}
       >
         {products?.products?.map((product) => (
-          <div key={product.id}>
+          <div key={product._id}>
             <Card
               title={product.manufacturer}
               description={product.name}
               price={product.price}
               image={product.image}
+              id={product._id}
             />
           </div>
         ))}

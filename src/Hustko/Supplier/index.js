@@ -1,5 +1,18 @@
+import { useEffect, useState } from 'react';
 import './index.css';
+import * as client from './SupplierClient';
+
 const Supplier = () => {
+  const [products, setProducts] = useState([]);
+
+  const getProductsBySupplierId = async () => {
+    const products = await client.findProductsBySupplierId();
+    setProducts(products);
+  };
+
+  useEffect(() => {
+    getProductsBySupplierId();
+  }, []);
   return (
     <div className="container">
       <h1>Supplier Panel</h1>
