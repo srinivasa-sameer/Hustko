@@ -1,6 +1,7 @@
 .signinBackground {
-  background-image: url('https://news.northeastern.edu/wp-content/uploads/2020/03/krentzman-zoom.jpg');
+  background-image: url("https://news.northeastern.edu/wp-content/uploads/2020/03/krentzman-zoom.jpg");
   background-size: cover;
+  height: 100%;
 }
 
 .mainContainer {

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Card from './Card/card';
-import * as SupplierClient from '../Supplier/SupplierClient';
+import React, { useEffect, useState } from "react";
+import Card from "./Card/card";
+import * as SupplierClient from "../Supplier/SupplierClient";
+import "../index.css";
 
 function Main() {
   const [products, setProducts] = useState([]);
@@ -12,11 +13,11 @@ function Main() {
     fetchProducts();
   }, []);
   return (
-    <div>
+    <div className="prevent-covered-by-nav">
       <h1>Featured Products</h1>
       <div
         className="container d-flex flex-row flex-wrap"
-        style={{ marginTop: '1 rem' }}
+        style={{ marginTop: "1 rem" }}
       >
         {products?.products?.map((product) => (
           <div key={product._id}>

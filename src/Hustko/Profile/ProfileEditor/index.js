@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { FcLike, FcDislike } from "react-icons/fc";
 import * as client from "../UserClient";
+import "../../index.css";
 
 function ProfileEditor() {
   const [account, setAccount] = useState({});
@@ -33,7 +34,7 @@ function ProfileEditor() {
   // const [isLiked, setLiked] = useState(true);
   return (
     <div>
-      <div className="container">
+      <div className="container prevent-covered-by-nav">
         <h1>Edit Profile</h1>
         <hr />
         <div class="row">

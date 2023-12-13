@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import * as client from './client';
-import * as SupplierClient from '../Supplier/SupplierClient';
+import React, { useState, useEffect } from "react";
+import * as client from "./client";
+import * as SupplierClient from "../Supplier/SupplierClient";
 import {
   BsFillCheckCircleFill,
   BsPlusCircleFill,
   BsTrash3Fill,
   BsPencil,
-} from 'react-icons/bs';
+} from "react-icons/bs";
 
-import Card from '../Main/Card/card';
+import Card from "../Main/Card/card";
+import "../index.css";
 
 const Admin = () => {
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState({
-    email: '',
-    role: 'USER',
+    email: "",
+    role: "USER",
   });
 
   const createUser = async () => {
@@ -67,7 +68,7 @@ const Admin = () => {
     fetchProducts();
   }, []);
   return (
-    <div className="container-fluid">
+    <div className="container-fluid prevent-covered-by-nav">
       <h2>Admin Panel</h2>
       <table className="table">
         <thead>
@@ -124,7 +125,7 @@ const Admin = () => {
               <BsPlusCircleFill
                 onClick={createUser}
                 className="fs-1 text"
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
               />
             </td>
           </tr>
@@ -153,7 +154,7 @@ const Admin = () => {
       <h2>List of Products</h2>
       <div
         className="container d-flex flex-row flex-wrap"
-        style={{ marginTop: '1 rem' }}
+        style={{ marginTop: "1 rem" }}
       >
         {products?.products?.map((product) => (
           <div key={product._id}>
