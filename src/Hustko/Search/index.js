@@ -19,7 +19,6 @@ const Search = () => {
   };
 
   const searchProducts = () => {
-    console.log(searchString);
     searchProductsInDatabase();
     if (searchText !== undefined) {
       searchString = searchText;
