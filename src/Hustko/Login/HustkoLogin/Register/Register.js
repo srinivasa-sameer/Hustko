@@ -28,7 +28,11 @@ function RegistrationForm() {
         <div className={'titleContainer'}>
           <div>Register</div>
         </div>
-        {error && <div>{error}</div>}
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
         <div className="email">
           <input
             type="email"

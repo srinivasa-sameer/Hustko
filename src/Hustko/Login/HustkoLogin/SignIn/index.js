@@ -4,14 +4,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as userClient from '../../../Profile/UserClient';
 
 const SignIn = (props) => {
+  const [error, setError] = useState('');
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
   });
   const navigate = useNavigate();
   const onLoginClick = async () => {
-    const response = await userClient.signin(credentials);
-    navigate('/Hustko/home');
+    try {
+      const response = await userClient.signin(credentials);
+      console.log(response);
+      if (response.role === 'USER') {
+        navigate('/Hustko/home');
+      } else if (response.role === 'SUPPLIER') {
+        navigate('/Hustko/Supplier');
+      } else {
+        navigate('/Hustko/Admin');
+      }
+    } catch (error) {
+      setError(error?.response?.data?.message);
+    }
   };
 
   return (
@@ -22,6 +34,11 @@ const SignIn = (props) => {
             <div>Login</div>
           </div>
           <br />
+          {error && (
+            <div className="alert alert-danger" role="alert">
+              {error}
+            </div>
+          )}
           <div className="inputContainer">
             <input
               value={credentials.email}
