@@ -28,19 +28,19 @@ const Search = () => {
         method: 'GET',
         url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
         params: {
-          api_key: '214fce8e1f0329d7b9d8bf1002dc9fd2',
+          api_key: '7c2ad0119c6de3c43906dd81cc9d3084'
         },
         headers: {
-          'X-RapidAPI-Key':
-            '3a316b5327mshd645ab47cc34fdap19bb56jsn5c6e5a76aa2f',
-          'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com',
-        },
+          'X-RapidAPI-Key': '956a814490msh6c6d99ab43a07a0p10b50fjsnc36d110f48cd',
+          'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com'
+        }
       };
 
       axios
         .request(options)
         .then(function (response) {
           setProducts(response.data.results);
+          console.log(response);
         })
         .catch(function (error) {});
     }
@@ -56,9 +56,9 @@ const Search = () => {
       style={{ marginTop: '1 rem' }}
     >
       {products?.map((product) => (
-        //<Link to={`/Hustko/ExternalDetails/${product.asin}`}>
         <div>
           <Card
+            linkTo={`/Hustko/ExternalDetails/${product.asin}`}
             title={''}
             description={product.name}
             price={product.price}
@@ -67,12 +67,11 @@ const Search = () => {
             icon={true}
           />
         </div>
-        //</Link>
       ))}
       {databaseProducts?.map((product) => (
-        //<Link to={`/Hustko/InternalDetails/${product._id}`}>
         <div>
           <Card
+            linkTo={`/Hustko/InternalDetails/${product._id}`}
             title={product.manufacturer}
             description={product.name}
             price={product.price}
@@ -81,7 +80,6 @@ const Search = () => {
             icon={true}
           />
         </div>
-        //</Link>
       ))}
     </div>
   );

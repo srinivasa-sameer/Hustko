@@ -15,6 +15,15 @@ export const GetRatingsAndReviewBasedOnProductId = async (id) => {
   );
   return data.data.ratingsAndReviews;
 };
+
+export const GetAverageRatingBasedOnProductId = async (id) => {
+  const data = await request.get(
+      `${GET_RATINGS_AND_REVIEW_BY_PRODUCT_ID_URL}/averageRating/${id}`
+  );
+  console.log(data.data.averageRating.toFixed(1));
+  return data.data.averageRating.toFixed(1);
+};
+
 export const GetRatingsAndReviewBasedOnUserId = async (user) => {
   const data = await request.get(
     `${GET_RATINGS_AND_REVIEW_BY_USER_ID_URL}/${user._id}`

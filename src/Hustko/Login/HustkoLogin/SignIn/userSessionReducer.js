@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import e from "cors";
 
 const initialState = {
   accountFetched: false,
