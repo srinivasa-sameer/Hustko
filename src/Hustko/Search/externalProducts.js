@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { IoStarSharp } from 'react-icons/io5';
 import { IoIosStarHalf } from 'react-icons/io';
 import RatingsAndReviews from '../RatingsAndReview';
+import {GetAverageRatingBasedOnProductId} from "../RatingsAndReview/client";
 
 const ExternalProducts = () => {
   const [productTitle, setproductTitle] = useState([]);
@@ -35,40 +36,44 @@ const ExternalProducts = () => {
     return <div>{starIcons}</div>;
   };
 
-  const productDetails = () => {
-    const options = {
-      method: 'GET',
-      url: `https://amazon-data-scraper128.p.rapidapi.com/products/${product_id}`,
-      params: {
-        api_key: '214fce8e1f0329d7b9d8bf1002dc9fd2',
-      },
-      headers: {
-        'X-RapidAPI-Key': '3a316b5327mshd645ab47cc34fdap19bb56jsn5c6e5a76aa2f',
-        'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com',
-      },
-    };
+  const productDetails = async () => {
+    const averageRating = await GetAverageRatingBasedOnProductId(product_id).then((data) => {
+      setStarsInfo(data);
+    });
+    // const options = {
+    //   method: 'GET',
+    //   url: `https://amazon-data-scraper128.p.rapidapi.com/products/${product_id}`,
+    //   params: {
+    //     api_key: '7c2ad0119c6de3c43906dd81cc9d3084',
+    //   },
+    //   headers: {
+    //     'X-RapidAPI-Key': '956a814490msh6c6d99ab43a07a0p10b50fjsnc36d110f48cd',
+    //     'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com',
+    //   },
+    // };
+
+    const options = null;
 
     axios
-      .request(options)
-      .then(function (response) {
-        setproductTitle(response.data.name);
-        setPriceInfo(response.data.pricing);
-        setStarsInfo(response.data.average_rating);
-        setDescription(response.data.small_description);
-        setImages(response.data.images);
-        setData({
-          ...data,
-          name: response.data.name,
-          asin: product_id,
-          stars: response.data.average_rating,
-          imageUrl: response.data.images[0],
-          price: response.data.pricing,
-          description: response.data.small_description,
+        .request(options)
+        .then(function (response) {
+          setproductTitle(response.data.name);
+          setPriceInfo(response.data.pricing);
+          setDescription(response.data.small_description);
+          setImages(response.data.images);
+          setData({
+                    ...data,
+                    name: response.data.name,
+                    asin: product_id,
+                    stars: averageRating,
+                    imageUrl: response.data.images[0],
+                    price: response.data.pricing,
+                    description: response.data.small_description,
+                  });
+        })
+        .catch(function (error) {
+          console.error(error);
         });
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
   };
 
   useEffect(() => {

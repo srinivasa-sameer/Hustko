@@ -6,7 +6,7 @@
 
 .card-body {
   width: 15rem;
-  height: 10rem;
+  height: 15rem;
   object-fit: cover;
 }
 
@@ -17,6 +17,7 @@
   cursor: pointer;
 }
 
-h5:hover {
-  color: red;
+Link {
+  color: black;
 }
+

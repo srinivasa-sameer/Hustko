@@ -5,6 +5,7 @@ import { IoStarSharp } from 'react-icons/io5';
 import { IoIosStarHalf } from 'react-icons/io';
 import { GetOneProduct } from './client';
 import RatingsAndReviews from '../RatingsAndReview';
+import {GetAverageRatingBasedOnProductId} from "../RatingsAndReview/client";
 
 const InternalProducts = () => {
   const [productTitle, setproductTitle] = useState([]);
@@ -35,18 +36,22 @@ const InternalProducts = () => {
     return <div>{starIcons}</div>;
   };
 
+
   const productDetails = async () => {
+    const averageRating = await GetAverageRatingBasedOnProductId(product_id).then((data) => {
+      setStarsInfo(data);
+    });
+
     const response = await GetOneProduct(product_id).then((DBdata) => {
       setproductTitle(DBdata.name);
       setPriceInfo('$' + DBdata.price);
-      setStarsInfo(DBdata.average_rating);
-      setDescription(DBdata.small_description);
+      setDescription();
       setImages([DBdata.image]);
       setData({
         ...data,
         name: DBdata.name,
         asin: product_id,
-        stars: DBdata.average_rating,
+        stars: averageRating,
         imageUrl: DBdata.image,
         price: DBdata.price,
         description: DBdata.small_description,
