@@ -1,32 +1,21 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BiSolidDog } from "react-icons/bi";
-import "./Nav.css";
-import * as userclient from "../Profile/UserClient";
-import { useSelector, useDispatch } from "react-redux";
-import { setUserSessionFetched } from "../Login/HustkoLogin/SignIn/userSessionReducer";
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { BiSolidDog } from 'react-icons/bi';
+import './Nav.css';
+import * as userclient from '../Profile/UserClient';
 function Nav() {
   const { pathname } = useLocation();
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   const [account, setAccount] = useState(null);
-  //const [accountFetched, setAccountFetched] = useState(null);
-  const accountFetched = useSelector(
-    (state) => state.userSessionReducer.accountFetched
-  );
-  const dispatch = useDispatch();
   const fetchAccount = async () => {
     const account = await userclient.account();
     setAccount(account);
-    if (account !== "") {
-      dispatch(setUserSessionFetched(true));
-    }
   };
   const navigate = useNavigate();
   const onSignOut = async () => {
     await userclient.signout();
-    dispatch(setUserSessionFetched(false));
-    navigate("/Hustko/Login");
+    navigate('/Hustko/Login');
   };
 
   useEffect(() => {
@@ -40,7 +29,7 @@ function Nav() {
             <li className="nav-item">
               <Link to="/Hustko" className="nav-link active fs-4">
                 <BiSolidDog
-                  style={{ fontSize: "1.2em" }}
+                  style={{ fontSize: '1.2em' }}
                   className="mx-2 mb-1"
                 />
                 Hustko
@@ -66,10 +55,9 @@ function Nav() {
             </Link>
           </form>
         </div>
-
-        <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-          <ul className="navbar-nav ms-auto mx-2 mb-2 mb-lg-0">
-            {accountFetched && (
+        {account ? (
+          <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul className="navbar-nav ms-auto mx-2 mb-2 mb-lg-0">
               <li className="nav-item hustko-dropdown mt-1">
                 <button
                   className="nav-link active dropdown btn btn-outline-dark dropdown-toggle"
@@ -97,23 +85,18 @@ function Nav() {
                   </li>
                 </ul>
               </li>
-            )}
-            {accountFetched && (
               <li className="nav-item">
                 <Link to="/Hustko/Profile" className="nav-link active fs-5">
                   Profile
                 </Link>
               </li>
-            )}
-            {!accountFetched && (
-              <li className="nav-item">
-                <Link to="/Hustko/login" className="nav-link active fs-5">
-                  Login
-                </Link>
-              </li>
-            )}
-          </ul>
-        </div>
+            </ul>
+          </div>
+        ) : (
+          <Link to="/Hustko/login" className="btn btn-primary">
+            Login
+          </Link>
+        )}
       </nav>
     </div>
   );
