@@ -73,7 +73,7 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/Login">
+                  <Link class="dropdown-item" to="/Hustko/login">
                     Sign Out
                   </Link>
                 </li>
