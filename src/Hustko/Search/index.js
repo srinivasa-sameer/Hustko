@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { SearchProductsInDatabase } from './client';
 import Card from '../Main/Card/card';
@@ -56,28 +56,32 @@ const Search = () => {
       style={{ marginTop: '1 rem' }}
     >
       {products?.map((product) => (
-        <Link to={`/Hustko/ExternalDetails/${product.asin}`}>
-          <div>
-            <Card
-              title={''}
-              description={product.name}
-              price={product.price}
-              image={product.image}
-            />
-          </div>
-        </Link>
+        //<Link to={`/Hustko/ExternalDetails/${product.asin}`}>
+        <div>
+          <Card
+            title={''}
+            description={product.name}
+            price={product.price}
+            image={product.image}
+            id={product.asin}
+            icon={true}
+          />
+        </div>
+        //</Link>
       ))}
       {databaseProducts?.map((product) => (
-        <Link to={`/Hustko/InternalDetails/${product._id}`}>
-          <div>
-            <Card
-              title={product.manufacturer}
-              description={product.name}
-              price={product.price}
-              image={product.image}
-            />
-          </div>
-        </Link>
+        //<Link to={`/Hustko/InternalDetails/${product._id}`}>
+        <div>
+          <Card
+            title={product.manufacturer}
+            description={product.name}
+            price={product.price}
+            image={product.image}
+            id={product._id}
+            icon={true}
+          />
+        </div>
+        //</Link>
       ))}
     </div>
   );

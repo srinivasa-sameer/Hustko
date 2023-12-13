@@ -72,11 +72,7 @@ const InternalProducts = () => {
               {images.map((image) => (
                 <div className="col-md-3 mb-4">
                   <div className="card">
-                    <img
-                      className="card-img-top"
-                      src={image}
-                      alt="product image"
-                    />
+                    <img src={image} alt="product image" />
                   </div>
                 </div>
               ))}
@@ -90,7 +86,7 @@ const InternalProducts = () => {
               <div className="col-md-4" style={{ textAlign: 'left' }}>
                 <span>
                   <b>Current Price</b>
-                </span>{' '}
+                </span>
                 :
               </div>
               <div className="col-md-8">
@@ -106,7 +102,7 @@ const InternalProducts = () => {
               >
                 <span>
                   <b>Rating</b>
-                </span>{' '}
+                </span>
                 :
               </div>
               <div className="col-md-8">
@@ -120,7 +116,7 @@ const InternalProducts = () => {
               <div className="col-md-4" style={{ textAlign: 'left' }}>
                 <span>
                   <b>Description</b>
-                </span>{' '}
+                </span>
                 :
               </div>
               <div className="col-md-8">
