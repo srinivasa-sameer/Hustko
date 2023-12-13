@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import './index.css';
-import * as client from './SupplierClient';
+import { useEffect, useState } from "react";
+import "./index.css";
+import * as client from "./SupplierClient";
+import "../index.css";
 
 const Supplier = () => {
   const [products, setProducts] = useState([]);
@@ -14,7 +15,7 @@ const Supplier = () => {
     getProductsBySupplierId();
   }, []);
   return (
-    <div className="container">
+    <div className="container prevent-covered-by-nav">
       <h1>Supplier Panel</h1>
       <hr />
       <div className="container">

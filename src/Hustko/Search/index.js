@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { SearchProductsInDatabase } from './client';
-import Card from '../Main/Card/card';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { SearchProductsInDatabase } from "./client";
+import Card from "../Main/Card/card";
+import "../index.css";
 
 const Search = () => {
   const [products, setProducts] = useState([]);
   const [databaseProducts, setDatabaseProducts] = useState([]);
   const { searchText } = useParams();
-  var searchString = '';
+  var searchString = "";
 
   const searchProductsInDatabase = async () => {
     if (searchText !== undefined) {
@@ -23,7 +24,7 @@ const Search = () => {
     if (searchText !== undefined) {
       searchString = searchText;
     }
-    if (searchString !== '') {
+    if (searchString !== "") {
       // const options = {
       //   method: 'GET',
       //   url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
@@ -54,14 +55,14 @@ const Search = () => {
 
   return (
     <div
-      className="container d-flex flex-row flex-wrap"
-      style={{ marginTop: '1 rem' }}
+      className="container d-flex flex-row flex-wrap prevent-covered-by-nav"
+      style={{ marginTop: "1 rem" }}
     >
       {products?.map((product) => (
         <div>
           <Card
             linkTo={`/Hustko/ExternalDetails/${product.asin}`}
-            title={''}
+            title={""}
             description={product.name}
             price={product.price}
             image={product.image}

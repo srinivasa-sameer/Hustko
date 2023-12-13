@@ -34,7 +34,7 @@ const SignIn = (props) => {
   });
 
   return (
-    <div className="signinBackground">
+    <div className="signinBackground mostly-customized-scrollbar">
       <div className="mainContainer">
         <div className="loginBox">
           <div className="titleContainer">
