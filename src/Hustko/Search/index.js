@@ -24,17 +24,19 @@ const Search = () => {
       searchString = searchText;
     }
     if (searchString !== '') {
-      const options = {
-        method: 'GET',
-        url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
-        params: {
-          api_key: '7c2ad0119c6de3c43906dd81cc9d3084'
-        },
-        headers: {
-          'X-RapidAPI-Key': '956a814490msh6c6d99ab43a07a0p10b50fjsnc36d110f48cd',
-          'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com'
-        }
-      };
+      // const options = {
+      //   method: 'GET',
+      //   url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
+      //   params: {
+      //     api_key: '7c2ad0119c6de3c43906dd81cc9d3084'
+      //   },
+      //   headers: {
+      //     'X-RapidAPI-Key': '956a814490msh6c6d99ab43a07a0p10b50fjsnc36d110f48cd',
+      //     'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com'
+      //   }
+      // };
+
+      const options = null;
 
       axios
         .request(options)
