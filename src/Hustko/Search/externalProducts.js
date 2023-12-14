@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import axios from "axios";
-import { Link, useParams } from "react-router-dom";
-import { IoStarSharp } from "react-icons/io5";
-import { IoIosStarHalf } from "react-icons/io";
-import RatingsAndReviews from "../RatingsAndReview";
-import { GetAverageRatingBasedOnProductId } from "../RatingsAndReview/client";
-import "../index.css";
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import { IoStarSharp } from 'react-icons/io5';
+import { IoIosStarHalf } from 'react-icons/io';
+import RatingsAndReviews from '../RatingsAndReview';
+import { GetAverageRatingBasedOnProductId } from '../RatingsAndReview/client';
+import '../index.css';
 
 const ExternalProducts = () => {
   const [productTitle, setproductTitle] = useState([]);
-  const [priceInfo, setPriceInfo] = useState("");
-  const [description, setDescription] = useState("");
+  const [priceInfo, setPriceInfo] = useState('');
+  const [description, setDescription] = useState('');
   const [stars, setStarsInfo] = useState(0);
   const [images, setImages] = useState([]);
   const [data, setData] = useState({
-    name: "",
+    name: '',
     imageUrl: [],
-    stars: "",
+    stars: '',
     price: 0,
-    asin: "",
-    description: "",
+    asin: '',
+    description: '',
   });
   const { product_id } = useParams();
 
@@ -28,11 +28,11 @@ const ExternalProducts = () => {
     let starIcons = [];
     let givenStars = 0;
     for (let i = 1; i <= stars; i++) {
-      starIcons.push(<IoStarSharp style={{ color: "gold" }} />);
+      starIcons.push(<IoStarSharp style={{ color: 'gold' }} />);
       givenStars = givenStars + 1;
     }
     if (stars - givenStars !== 0) {
-      starIcons.push(<IoIosStarHalf style={{ color: "gold" }} />);
+      starIcons.push(<IoIosStarHalf style={{ color: 'gold' }} />);
     }
     return <div>{starIcons}</div>;
   };
@@ -43,19 +43,19 @@ const ExternalProducts = () => {
     ).then((data) => {
       setStarsInfo(data);
     });
-    // const options = {
-    //   method: 'GET',
-    //   url: `https://amazon-data-scraper128.p.rapidapi.com/products/${product_id}`,
-    //   params: {
-    //     api_key: '7c2ad0119c6de3c43906dd81cc9d3084',
-    //   },
-    //   headers: {
-    //     'X-RapidAPI-Key': '956a814490msh6c6d99ab43a07a0p10b50fjsnc36d110f48cd',
-    //     'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com',
-    //   },
-    // };
+    const options = {
+      method: 'GET',
+      url: `https://amazon-data-scraper128.p.rapidapi.com/products/${product_id}`,
+      params: {
+        api_key: '7c2ad0119c6de3c43906dd81cc9d3084',
+      },
+      headers: {
+        'X-RapidAPI-Key': '956a814490msh6c6d99ab43a07a0p10b50fjsnc36d110f48cd',
+        'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com',
+      },
+    };
 
-    const options = null;
+    //const options = null;
 
     axios
       .request(options)
@@ -91,7 +91,7 @@ const ExternalProducts = () => {
         <h1>{productTitle}</h1>
         <div
           className="my-3 mx-auto"
-          style={{ display: "flex", flexDirection: "row" }}
+          style={{ display: 'flex', flexDirection: 'row' }}
         >
           <div className="container">
             <div className="row justify-content-center">
@@ -113,10 +113,10 @@ const ExternalProducts = () => {
         <ul className="list-group mt-5">
           <li className="list-group-item">
             <div className="row">
-              <div className="col-md-4" style={{ textAlign: "left" }}>
+              <div className="col-md-4" style={{ textAlign: 'left' }}>
                 <span>
                   <b>Current Price</b>
-                </span>{" "}
+                </span>{' '}
                 :
               </div>
               <div className="col-md-8">
@@ -128,11 +128,11 @@ const ExternalProducts = () => {
             <div className="row">
               <div
                 className="col-md-4"
-                style={{ textAlign: "left", verticalAlign: "middle" }}
+                style={{ textAlign: 'left', verticalAlign: 'middle' }}
               >
                 <span>
                   <b>Rating</b>
-                </span>{" "}
+                </span>{' '}
                 :
               </div>
               <div className="col-md-8">
@@ -143,10 +143,10 @@ const ExternalProducts = () => {
           </li>
           <li className="list-group-item">
             <div className="row">
-              <div className="col-md-4" style={{ textAlign: "left" }}>
+              <div className="col-md-4" style={{ textAlign: 'left' }}>
                 <span>
                   <b>Description</b>
-                </span>{" "}
+                </span>{' '}
                 :
               </div>
               <div className="col-md-8">
