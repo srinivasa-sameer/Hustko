@@ -10,6 +10,7 @@ import '../index.css';
 
 const ExternalProducts = () => {
   const [productTitle, setproductTitle] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   const [priceInfo, setPriceInfo] = useState('');
   const [description, setDescription] = useState('');
   const [stars, setStarsInfo] = useState(0);
@@ -80,9 +81,8 @@ const ExternalProducts = () => {
   };
 
   useEffect(() => {
-    console.log(product_id);
     productDetails();
-  }, [product_id]);
+  }, [product_id, refresh]);
 
   return (
     <div className="container prevent-covered-by-nav">
@@ -155,7 +155,11 @@ const ExternalProducts = () => {
             </div>
           </li>
         </ul>
-        <RatingsAndReviews productId={product_id}></RatingsAndReviews>
+        <RatingsAndReviews
+          setRefresh={setRefresh}
+          refresh={refresh}
+          productId={product_id}
+        ></RatingsAndReviews>
       </div>
     </div>
   );
