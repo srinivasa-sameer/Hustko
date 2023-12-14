@@ -1,17 +1,17 @@
-import { Route, Routes, Navigate } from "react-router";
-import Nav from "./Navigation/Nav";
-import Main from "./Main";
-import Profile from "./Profile";
-import Search from "./Search";
-import Admin from "./Admin";
-import Supplier from "./Supplier";
-import ProfileEditor from "./Profile/ProfileEditor";
-import ExternalProducts from "./Search/externalProducts";
-import InternalProducts from "./Search/internalProducts";
-import SignIn from "./Login/HustkoLogin/SignIn";
-import RegistrationForm from "./Login/HustkoLogin/Register/Register";
-import store from "./store";
-import { Provider } from "react-redux";
+import { Route, Routes, Navigate } from 'react-router';
+import Nav from './Navigation/Nav';
+import Main from './Main';
+import Profile from './Profile';
+import Search from './Search';
+import Admin from './Admin';
+import Supplier from './Supplier';
+import ProfileEditor from './Profile/ProfileEditor';
+import ExternalProducts from './Search/externalProducts';
+import InternalProducts from './Search/internalProducts';
+import SignIn from './Login/HustkoLogin/SignIn';
+import RegistrationForm from './Login/HustkoLogin/Register/Register';
+import store from './store';
+import { Provider } from 'react-redux';
 
 function Hustko() {
   return (

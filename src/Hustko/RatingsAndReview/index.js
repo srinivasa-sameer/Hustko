@@ -9,7 +9,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import * as userclient from "../Profile/UserClient";
 
-const RatingsAndReviews = ({ productId }) => {
+const RatingsAndReviews = ({ productId, setRefresh, refresh }) => {
   const [ratingsAndReviews, setRatingsAndReviews] = useState([]);
   const [reviewsWithUserNames, setReviewsWithUserNames] = useState([]);
   const [ratingAndReviewData, setRatingAndReviewData] = useState({
@@ -34,6 +34,7 @@ const RatingsAndReviews = ({ productId }) => {
     if (account !== "") {
       await UpdateRatingsAndReviewBasedOnProductId(ratingAndReviewData);
       setRatingsAndReviews([...ratingsAndReviews, ratingAndReviewData]);
+      setRefresh(!refresh);
     } else {
       navigate("/Hustko/Login");
     }

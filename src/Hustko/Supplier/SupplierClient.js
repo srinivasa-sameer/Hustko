@@ -24,6 +24,12 @@ export const deleteProduct = async (product) => {
 };
 
 export const findProductsBySupplierId = async (supplierId) => {
-  const response = await request.get(`${PRODUCTS_API}/${supplierId}`);
+  const response = await request.get(`${PRODUCTS_API}/supplier/${supplierId}`);
   return response.data;
+};
+
+export const findProductById = async (id) => {
+  const data = await request.get(PRODUCTS_API + `/${id}`);
+  console.log(data.data.products);
+  return data.data.products;
 };
