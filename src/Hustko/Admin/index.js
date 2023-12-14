@@ -159,6 +159,7 @@ const Admin = () => {
         {products?.products?.map((product) => (
           <div key={product._id}>
             <Card
+              currentUserId=""
               title={product.manufacturer}
               description={product.name}
               price={product.price}

@@ -4,6 +4,7 @@ import axios from "axios";
 import { SearchProductsInDatabase } from "./client";
 import Card from "../Main/Card/card";
 import "../index.css";
+import * as userclient from "../Profile/UserClient";
 
 const Search = () => {
   const [products, setProducts] = useState([]);
@@ -48,8 +49,14 @@ const Search = () => {
         .catch(function (error) {});
     }
   };
+  const [account, setAccount] = useState(null);
+  const fetchAccount = async () => {
+    const currAccount = await userclient.account();
+    setAccount(currAccount);
+  };
 
   useEffect(() => {
+    fetchAccount();
     searchProducts();
   }, [searchText]);
 
@@ -61,6 +68,7 @@ const Search = () => {
       {products?.map((product) => (
         <div>
           <Card
+            currentUserId={account._id}
             linkTo={`/Hustko/ExternalDetails/${product.asin}`}
             title={""}
             description={product.name}
@@ -74,6 +82,7 @@ const Search = () => {
       {databaseProducts?.map((product) => (
         <div>
           <Card
+            currentUserId={account._id}
             linkTo={`/Hustko/InternalDetails/${product._id}`}
             title={product.manufacturer}
             description={product.name}
