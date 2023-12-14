@@ -158,21 +158,6 @@ function Profile() {
                     {account.primAddress}
                   </li>
                 )}
-                {/* {account && (
-                  <li className="list-group-item">
-                    <strong>Favorite Items: </strong>
-                    {favoriteItems.map((product) => (
-                      <div>
-                        <Card
-                          title={product.manufacturer}
-                          description={product.name}
-                          price={product.price}
-                          image={product.image}
-                        />
-                      </div>
-                    ))}
-                  </li>
-                )} */}
               </ul>
             </div>
             <div className="d-flex justify-content-center">
@@ -224,11 +209,14 @@ function Profile() {
               <div className="d-flex flex-row flex-wrap">
                 {favoriteItems.map((product) => (
                   <Card
+                    currentUserId={account._id}
+                    linkTo={`/Hustko/InternalDetails/${product._id}`}
                     title={product.manufacturer}
                     description={product?.name}
                     price={product.price}
                     image={product.image}
-                    icon={false}
+                    id={product._id}
+                    icon={true}
                   />
                 ))}
               </div>

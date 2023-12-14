@@ -41,15 +41,15 @@ export const signout = async () => {
   const response = await request.post(`${USERS_API}/signout`);
   return response.data;
 };
-export const addFavoriteItem = async (user, item) => {
+export const addFavoriteItem = async (userId, itemId) => {
   const response = await request.put(
-    `${USERS_API}/favoriteadd/${user._id}/${item._id}`
+    `${USERS_API}/favoriteadd/${userId}/${itemId}`
   );
   return response.data;
 };
-export const removeFavoriteItem = async (user, item) => {
+export const removeFavoriteItem = async (userId, itemId) => {
   const response = await request.put(
-    `${USERS_API}/favoriteremove/${user._id}/${item._id}`
+    `${USERS_API}/favoriteremove/${userId}/${itemId}`
   );
   return response.data;
 };
