@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BiSolidDog } from "react-icons/bi";
-import "./Nav.css";
-import * as userclient from "../Profile/UserClient";
-import { useSelector, useDispatch } from "react-redux";
-import { setUserSessionFetched } from "../Login/HustkoLogin/SignIn/userSessionReducer";
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { BiSolidDog } from 'react-icons/bi';
+import './Nav.css';
+import * as userclient from '../Profile/UserClient';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserSessionFetched } from '../Login/HustkoLogin/SignIn/userSessionReducer';
 function Nav() {
   const { pathname } = useLocation();
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   const [account, setAccount] = useState(null);
   //const [accountFetched, setAccountFetched] = useState(null);
@@ -18,7 +18,7 @@ function Nav() {
   const fetchAccount = async () => {
     const account = await userclient.account();
     setAccount(account);
-    if (account !== "") {
+    if (account !== '') {
       dispatch(setUserSessionFetched(true));
     }
   };
@@ -26,7 +26,7 @@ function Nav() {
   const onSignOut = async () => {
     await userclient.signout();
     dispatch(setUserSessionFetched(false));
-    navigate("/Hustko/Login");
+    navigate('/Hustko/Login');
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function Nav() {
             <li className="nav-item">
               <Link to="/Hustko" className="nav-link active fs-4">
                 <BiSolidDog
-                  style={{ fontSize: "1.2em" }}
+                  style={{ fontSize: '1.2em' }}
                   className="mx-2 mb-1"
                 />
                 Hustko
@@ -83,11 +83,6 @@ function Nav() {
                   <li>
                     <Link className="dropdown-item" to="/Hustko/Addresses">
                       All Addresses
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Hustko/LikedItems">
-                      Liked Items
                     </Link>
                   </li>
                   <li>
