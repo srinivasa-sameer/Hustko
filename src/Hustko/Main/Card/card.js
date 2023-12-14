@@ -1,8 +1,8 @@
-import { useState } from "react";
-import "./card.css";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
-import * as searchClient from "../../Search/client";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import './card.css';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import * as searchClient from '../../Search/client';
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
   const [favorite, setFavorite] = useState(false);
@@ -30,7 +30,7 @@ const Card = (props) => {
           </div>
         )}
         <h5 className="card-title">{props.title}</h5>
-        <Link to={props.linkTo} style={{ textDecoration: "none" }}>
+        <Link to={props.linkTo} style={{ textDecoration: 'none' }}>
           <p className="card-text">{props.description}</p>
           <p className="card-text">${props.price}</p>
         </Link>

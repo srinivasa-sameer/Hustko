@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { BiSolidEditAlt } from "react-icons/bi";
-import * as client from "./UserClient";
-import * as productClient from "../Search/client";
-import * as ratingsReviewClient from "../RatingsAndReview/client";
-import Card from "../Main/Card/card";
-import { IoStarSharp } from "react-icons/io5";
-import { IoIosStarHalf } from "react-icons/io";
-import "../index.css";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { BiSolidEditAlt } from 'react-icons/bi';
+import * as client from './UserClient';
+import * as productClient from '../Search/client';
+import * as ratingsReviewClient from '../RatingsAndReview/client';
+import Card from '../Main/Card/card';
+import { IoStarSharp } from 'react-icons/io5';
+import { IoIosStarHalf } from 'react-icons/io';
+import '../index.css';
 
 function Profile() {
   const { userId } = useParams();
@@ -22,8 +22,8 @@ function Profile() {
   const navigate = useNavigate();
   const reformattedDate = (rawDate) => {
     const unformattedDate = new Date(rawDate);
-    const options = { year: "numeric", month: "numeric", day: "numeric" };
-    const formattedDate = unformattedDate.toLocaleDateString("en-CA", options);
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const formattedDate = unformattedDate.toLocaleDateString('en-CA', options);
     return formattedDate;
   };
   const fetchAccount = async () => {
@@ -64,8 +64,8 @@ function Profile() {
           );
           return { ...ratingAndReview, productName: product };
         } catch (error) {
-          console.error("Error fetching product:", error);
-          return { ...ratingAndReview, productName: "Unknown Product" };
+          console.error('Error fetching product:', error);
+          return { ...ratingAndReview, productName: 'Unknown Product' };
         }
       })
     );
@@ -91,11 +91,11 @@ function Profile() {
     let starIcons = [];
     let givenStars = 0;
     for (let i = 1; i <= stars; i++) {
-      starIcons.push(<IoStarSharp style={{ color: "gold" }} />);
+      starIcons.push(<IoStarSharp style={{ color: 'gold' }} />);
       givenStars = givenStars + 1;
     }
     if (stars - givenStars !== 0) {
-      starIcons.push(<IoIosStarHalf style={{ color: "gold" }} />);
+      starIcons.push(<IoIosStarHalf style={{ color: 'gold' }} />);
     }
     return <div>{starIcons}</div>;
   };
@@ -195,7 +195,7 @@ function Profile() {
             </div>
             <div className="m-4">
               <h4 className="d-flex justify-content-left">
-                Ratings and Reviews:{" "}
+                Ratings and Reviews:
               </h4>
               {ratingsAndReviewsWithProductNames && (
                 <ul className="list-group">
@@ -204,14 +204,14 @@ function Profile() {
                       <Link
                         to={`/Hustko/InternalDetails/${ratingAndReview.productId}`}
                       >
-                        <p style={{ textAlign: "left" }}>
-                          {ratingAndReview.productName.name}
+                        <p style={{ textAlign: 'left' }}>
+                          {ratingAndReview?.productName?.name}
                         </p>
                       </Link>
-                      <p style={{ textAlign: "left" }}>
+                      <p style={{ textAlign: 'left' }}>
                         {generateStars(ratingAndReview.ratings)}
                       </p>
-                      <p style={{ textAlign: "left" }}>
+                      <p style={{ textAlign: 'left' }}>
                         {ratingAndReview.review}
                       </p>
                     </li>
@@ -225,7 +225,7 @@ function Profile() {
                 {favoriteItems.map((product) => (
                   <Card
                     title={product.manufacturer}
-                    description={product.name}
+                    description={product?.name}
                     price={product.price}
                     image={product.image}
                     icon={false}

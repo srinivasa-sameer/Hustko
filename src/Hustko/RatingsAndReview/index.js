@@ -9,7 +9,7 @@ import {
 import { account, findUserById } from '../Profile/UserClient';
 import { Link } from 'react-router-dom';
 
-const RatingsAndReviews = ({ productId }) => {
+const RatingsAndReviews = ({ productId, setRefresh, refresh }) => {
   const [ratingsAndReviews, setRatingsAndReviews] = useState([]);
   const [reviewsWithUserNames, setReviewsWithUserNames] = useState([]);
   const [ratingAndReviewData, setRatingAndReviewData] = useState({
@@ -31,6 +31,7 @@ const RatingsAndReviews = ({ productId }) => {
   const addRatingAndReview = async () => {
     await UpdateRatingsAndReviewBasedOnProductId(ratingAndReviewData);
     setRatingsAndReviews([...ratingsAndReviews, ratingAndReviewData]);
+    setRefresh(!refresh);
   };
 
   const handleChange = (event) => {
