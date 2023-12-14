@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import { SearchProductsInDatabase } from "./client";
-import Card from "../Main/Card/card";
-import "../index.css";
-import * as userclient from "../Profile/UserClient";
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { SearchProductsInDatabase } from './client';
+import Card from '../Main/Card/card';
+import '../index.css';
+import * as userclient from '../Profile/UserClient';
 
 const Search = () => {
   const [products, setProducts] = useState([]);
   const [databaseProducts, setDatabaseProducts] = useState([]);
   const { searchText } = useParams();
-  var searchString = "";
+  var searchString = '';
 
   const searchProductsInDatabase = async () => {
     if (searchText !== undefined) {
@@ -25,20 +25,21 @@ const Search = () => {
     if (searchText !== undefined) {
       searchString = searchText;
     }
-    if (searchString !== "") {
-      // const options = {
-      //   method: 'GET',
-      //   url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
-      //   params: {
-      //     api_key: '7c2ad0119c6de3c43906dd81cc9d3084'
-      //   },
-      //   headers: {
-      //     'X-RapidAPI-Key': '956a814490msh6c6d99ab43a07a0p10b50fjsnc36d110f48cd',
-      //     'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com'
-      //   }
-      // };
+    if (searchString !== '') {
+      const options = {
+        method: 'GET',
+        url: `https://amazon-data-scraper128.p.rapidapi.com/search/${searchString}`,
+        params: {
+          api_key: '7c2ad0119c6de3c43906dd81cc9d3084',
+        },
+        headers: {
+          'X-RapidAPI-Key':
+            '956a814490msh6c6d99ab43a07a0p10b50fjsnc36d110f48cd',
+          'X-RapidAPI-Host': 'amazon-data-scraper128.p.rapidapi.com',
+        },
+      };
 
-      const options = null;
+      //const options = null;
 
       axios
         .request(options)
@@ -63,14 +64,14 @@ const Search = () => {
   return (
     <div
       className="container d-flex flex-row flex-wrap prevent-covered-by-nav"
-      style={{ marginTop: "1 rem" }}
+      style={{ marginTop: '1 rem' }}
     >
       {products?.map((product) => (
         <div>
           <Card
             currentUserId={account._id}
             linkTo={`/Hustko/ExternalDetails/${product.asin}`}
-            title={""}
+            title={''}
             description={product.name}
             price={product.price}
             image={product.image}
