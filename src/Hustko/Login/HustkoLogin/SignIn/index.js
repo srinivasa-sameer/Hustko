@@ -19,10 +19,13 @@ const SignIn = (props) => {
       const response = await userClient.signin(credentials);
       dispatch(setUserSessionFetched(true));
       if (response.role === 'USER') {
+        localStorage.setItem('Role', 'USER');
         navigate('/Hustko/home');
       } else if (response.role === 'SUPPLIER') {
+        localStorage.setItem('Role', 'SUPPLIER');
         navigate('/Hustko/Supplier');
       } else {
+        localStorage.setItem('Role', 'ADMIN');
         navigate('/Hustko/Admin');
       }
     } catch (error) {

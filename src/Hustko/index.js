@@ -12,6 +12,8 @@ import SignIn from './Login/HustkoLogin/SignIn';
 import RegistrationForm from './Login/HustkoLogin/Register/Register';
 import store from './store';
 import { Provider } from 'react-redux';
+import AdminAuth from './AdminAuth';
+import SupplierAuth from './SupplierAuth';
 
 function Hustko() {
   return (
@@ -25,8 +27,14 @@ function Hustko() {
           <Route path="home/*" element={<Main />} />
           <Route path="Profile" element={<Profile />} />
           <Route path="Search" element={<Main />} />
-          <Route path="Admin" element={<Admin />} />
-          <Route path="Supplier" element={<Supplier />} />
+          <Route
+            path="Admin"
+            element={<AdminAuth children={<Admin />}></AdminAuth>}
+          />
+          <Route
+            path="Supplier"
+            element={<SupplierAuth children={<Supplier />}></SupplierAuth>}
+          />
           <Route
             path="ExternalDetails/:product_id"
             element={<ExternalProducts />}

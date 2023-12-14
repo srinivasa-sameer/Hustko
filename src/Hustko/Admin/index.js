@@ -41,7 +41,10 @@ const Admin = () => {
   const deleteProduct = async (product) => {
     try {
       await SupplierClient.deleteProduct(product);
-      setProducts(products.filter((p) => p._id !== product._id));
+      setProducts({
+        ...products,
+        products: products?.products.filter((p) => p._id !== product._id),
+      });
     } catch (err) {
       console.log(err);
     }
